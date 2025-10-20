@@ -1,0 +1,68 @@
+{
+  "name": "qa-challenge-automation",
+  "version": "1.0.0",
+  "description": "QA Challenge - Playwright Test Automation Framework for ParaBank",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:trace": "playwright test --trace on",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project=mobile-chrome --project=mobile-safari",
+    "test:smoke": "playwright test --grep=\"TC01|TC02|TC03\"",
+    "test:critical": "playwright test --grep=\"TC01|TC02|TC03|TC04|TC05|TC_AUTO_013|TC_AUTO_014\"",
+    "test:functional": "playwright test --grep=\"TC01|TC04|TC09|TC10|TC11|TC12|TC_AUTO_013|TC_AUTO_014|TC_AUTO_017|TC_AUTO_018\"",
+    "test:validation": "playwright test --grep=\"TC02|TC03|TC07|TC13A\"",
+    "test:security": "playwright test --grep=\"TC05|TC08\"",
+    "test:ui": "playwright test --grep=\"TC01|TC06\"",
+    "test:accessibility": "playwright test --grep=\"TC09\"",
+    "install:browsers": "playwright install",
+    "install:deps": "playwright install-deps",
+    "setup": "npm install && playwright install",
+    "clean": "rm -rf test-results playwright-report screenshots/temp",
+    "lint": "echo 'Linting TypeScript files...' && npx tsc --noEmit",
+    "pretest": "npm run lint"
+  },
+  "keywords": [
+    "qa",
+    "testing",
+    "automation",
+    "playwright",
+    "typescript",
+    "parabank",
+    "e2e",
+    "ui-testing",
+    "regression",
+    "ci-cd"
+  ],
+  "author": "starling26",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/starling26/qa-challenge-automation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/starling26/qa-challenge-automation/issues"
+  },
+  "homepage": "https://github.com/starling26/qa-challenge-automation#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
+}
