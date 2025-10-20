@@ -1,231 +1,232 @@
 # 🚀 GitHub Actions Workflows - Comprehensive CI/CD Suite
 
-Este proyecto incluye un conjunto completo de workflows de GitHub Actions para automatización de testing, evidencia de bugs, performance y seguridad.
+This project includes a comprehensive set of GitHub Actions workflows for automating testing, bug evidence collection, performance, and security.
 
-## 📋 Workflows Disponibles
+## 📋 Available Workflows
 
 ### 1. 🧪 E2E Testing Suite (`e2e-tests.yml`)
 **Trigger**: Push, PR, manual  
-**Descripción**: Pipeline principal de testing end-to-end con ejecución paralela en múltiples navegadores y plataformas.
+**Description**: Main end-to-end testing pipeline with parallel execution across multiple browsers and platforms.
 
-**Características**:
-- ✅ Testing paralelo en Chromium, Firefox, WebKit
-- 📱 Testing mobile (Chrome y Safari)
-- 🖥️ Testing en múltiples SO (Ubuntu, Windows, macOS)
-- 📊 Reportes HTML interactivos
-- 📸 Screenshots automáticos en fallos
-- 🔗 Deploy automático a GitHub Pages
-- 📈 Métricas de performance integradas
+**Features**:
+- ✅ Parallel testing on Chromium, Firefox, WebKit
+- 📱 Mobile testing (Chrome and Safari)
+- 🖥️ Multi-OS testing (Ubuntu, Windows, macOS)
+- 📊 Interactive HTML reports
+- 📸 Automatic screenshots on failures
+- 🔗 Automatic deploy to GitHub Pages
+- 📈 Integrated performance metrics
 
-**Uso**:
+**Usage**:
 ```bash
-# Ejecutar manualmente
+# Run manually
 gh workflow run e2e-tests.yml
 
-# Con parámetros específicos
+# With specific parameters
 gh workflow run e2e-tests.yml -f test_category=contact-form -f browsers=chromium
 ```
 
 ### 2. 🐛 Bug Evidence Capture (`bug-evidence.yml`)
-**Trigger**: Manual, automático después de fallos  
-**Descripción**: Captura automática de evidencia para tests que fallan.
+**Trigger**: Manual, automatically after failures  
+**Description**: Automatic evidence capture for failing tests.
 
-**Características**:
-- 📸 Screenshots automáticos de fallos
-- 🎥 Videos de ejecución (cuando es posible)
-- 📋 Reportes detallados de evidencia
-- 🔄 Consolidación de evidencia por tipo de bug
-- 📊 Reporte maestro de bugs identificados
-- 🎯 Categorización automática de fallos
+**Features**:
+- 📸 Automatic screenshots on failures
+- 🎥 Execution videos (when available)
+- 📋 Detailed evidence reports
+- 🔄 Consolidation of evidence by bug type
+- 📊 Master report of identified bugs
+- 🎯 Automatic failure categorization
 
-**Tests con evidencia automática**:
-- TC08: Validación de teléfono
-- TC03: Validación de email
-- TC_AUTO_013: Login con credenciales inválidas
-- TC_AUTO_018: Transferencia sin fondos
+**Tests with automatic evidence**:
+- TC08: Phone validation
+- TC03: Email validation
+- TC_AUTO_013: Login with invalid credentials
+- TC_AUTO_018: Transfer with insufficient funds
 
 ### 3. ⚡ Performance Testing (`performance.yml`)
-**Trigger**: Semanal (domingos), manual  
-**Descripción**: Testing de performance con diferentes configuraciones de workers.
+**Trigger**: Weekly (Sundays), manual  
+**Description**: Performance testing with different worker configurations.
 
-**Características**:
-- 📊 Tests con 1, 3, y 5 workers paralelos
-- ⏱️ Medición de tiempos de ejecución
-- 🏆 Identificación de configuración óptima
-- 📈 Comparación de performance entre configuraciones
-- 🎯 Recomendaciones automáticas para CI/CD
-- 🔥 Tests de stress, load y endurance
+**Features**:
+- 📊 Tests with 1, 3, and 5 parallel workers
+- ⏱️ Execution time measurements
+- 🏆 Identification of optimal configuration
+- 📈 Performance comparison across configurations
+- 🎯 Automated recommendations for CI/CD
+- 🔥 Stress, load, and endurance tests
 
-**Tipos de test**:
-- **Standard**: Testing normal de performance
-- **Stress**: 20 tests con 10 repeticiones
-- **Load**: 50 tests paralelos
-- **Endurance**: Testing continuo por 2 horas
+**Test types**:
+- **Standard**: Normal performance testing
+- **Stress**: 20 tests with 10 repetitions
+- **Load**: 50 parallel tests
+- **Endurance**: Continuous testing for 2 hours
 
 ### 4. 🔄 Regression Testing (`regression.yml`)
 **Trigger**: Push, PR, manual  
-**Descripción**: Suite completa de testing de regresión con análisis de cambios.
+**Description**: Full regression testing suite with change analysis.
 
-**Características**:
-- 🔍 Análisis automático de archivos cambiados
-- 🎯 Scope dinámico basado en cambios
-- 🖥️ Testing cross-platform (Ubuntu, Windows, macOS)
-- 🌐 Testing cross-browser completo
-- 📊 Reportes de regresión detallados
-- 💬 Comentarios automáticos en PRs
-- ❌ Fallo del workflow si regresión detectada
+**Features**:
+- 🔍 Automatic analysis of changed files
+- 🎯 Dynamic scope based on changes
+- 🖥️ Cross-platform testing (Ubuntu, Windows, macOS)
+- 🌐 Full cross-browser testing
+- 📊 Detailed regression reports
+- 💬 Automatic comments on PRs
+- ❌ Workflow fails if regression detected
 
-**Scopes disponibles**:
-- **Smoke**: Tests críticos básicos (TC01, TC02, TC03)
-- **Critical**: Tests principales del sistema
-- **Recent**: Solo tests nuevos (TC_AUTO_*)
-- **Full**: Suite completa de regresión
+**Available scopes**:
+- **Smoke**: Basic critical tests (TC01, TC02, TC03)
+- **Critical**: Main system tests
+- **Recent**: Only new tests (TC_AUTO_*)
+- **Full**: Full regression suite
 
 ### 5. 🔒 Security Testing (`security.yml`)
-**Trigger**: Semanal (lunes), manual  
-**Descripción**: Testing de seguridad básica y análisis de vulnerabilidades.
+**Trigger**: Weekly (Mondays), manual  
+**Description**: Basic security testing and vulnerability analysis.
 
-**Características**:
-- 🔒 Testing XSS (Cross-Site Scripting)
-- 💉 Testing SQL Injection
-- ✅ Validación de input sanitization
-- 🛡️ Análisis de security headers
-- 🔐 Verificación de HTTPS enforcement
-- 📊 Reportes de vulnerabilidades
-- 🎯 Recomendaciones de seguridad
+**Features**:
+- 🔒 XSS (Cross-Site Scripting) testing
+- 💉 SQL Injection testing
+- ✅ Input sanitization validation
+- 🛡️ Security headers analysis
+- 🔐 HTTPS enforcement verification
+- 📊 Vulnerability reports
+- 🎯 Security recommendations
 
-**Tipos de test de seguridad**:
-- **XSS**: 10+ payloads de XSS diferentes
-- **Injection**: 10+ payloads de SQL injection
-- **Validation**: Tests de buffer overflow, path traversal, etc.
-- **Headers**: Análisis de headers de seguridad
+**Security test types**:
+- **XSS**: 10+ different XSS payloads
+- **Injection**: 10+ SQL injection payloads
+- **Validation**: Buffer overflow, path traversal, etc.
+- **Headers**: Security headers analysis
 
-## 🚀 Configuración y Uso
+## 🚀 Configuration and Usage
 
-### Variables de Entorno Requeridas
+### Required Environment Variables
 ```yaml
 env:
   BASE_URL: https://parabank.parasoft.com/parabank
 ```
 
-### Dependencias del Proyecto
+### Project Dependencies
 - Node.js 18+
 - Playwright
-- Tests en TypeScript
+- Tests in TypeScript
 
-### Estructura de Artifacts
+### Artifacts Structure
 
-Cada workflow genera artifacts organizados:
+Each workflow generates organized artifacts:
 
 ```
 artifacts/
-├── test-results-{browser}/          # Resultados por navegador
-├── performance-results-{workers}/   # Resultados de performance
-├── regression-results-{os}-{browser}/ # Resultados de regresión
-├── security-results-{type}/         # Resultados de seguridad
-├── bug-evidence-{test}/            # Evidencia de bugs
-└── master-reports/                 # Reportes consolidados
+├── test-results-{browser}/          # Results by browser
+├── performance-results-{workers}/   # Performance results
+├── regression-results-{os}-{browser}/ # Regression results
+├── security-results-{type}/         # Security results
+├── bug-evidence-{test}/             # Bug evidence
+└── master-reports/                  # Consolidated reports
 ```
 
-## 📊 Reportes y Evidencia
+## 📊 Reports and Evidence
 
-### Reportes HTML Interactivos
-- Accesibles via GitHub Pages
-- Navegación por categorías de test
-- Screenshots integrados
-- Métricas de performance
+### Interactive HTML Reports
+- Accessible via GitHub Pages
+- Navigation by test categories
+- Integrated screenshots
+- Performance metrics
 
-### Evidencia de Bugs
-- Screenshots automáticos en fallos
-- Videos cuando están disponibles
-- Logs detallados de ejecución
-- Contexto de error completo
+### Bug Evidence
+- Automatic screenshots on failures
+- Videos when available
+- Detailed execution logs
+- Full error context
 
-### Badges de Estado
-Los workflows generan badges automáticos:
-- Performance: `Performance-{tiempo}s-{color}`
-- Regresión: `Regression-{porcentaje}%-{color}`
+### Status Badges
+Workflows generate automatic badges:
+- Performance: `Performance-{time}s-{color}`
+- Regression: `Regression-{percentage}%-{color}`
 - Security: `Security-{score}-{color}`
 
-## 🔧 Personalización
+## 🔧 Customization
 
-### Agregar Nuevos Tests
-1. Crear test en `/tests/`
-2. Seguir convención de nombres `TC##`
-3. Los workflows detectarán automáticamente
+### Add New Tests
+1. Create a test in `/tests/`
+2. Follow the naming convention `TC##`
+3. Workflows will detect them automatically
 
-### Modificar Triggers
-Editar secciones `on:` en cada workflow:
+### Modify Triggers
+Edit the `on:` sections in each workflow:
 ```yaml
 on:
   schedule:
-    - cron: '0 6 * * 1'  # Lunes 6:00 AM
+    - cron: '0 6 * * 1'  # Monday 6:00 AM
   workflow_dispatch:     # Manual
   push:
-    branches: [main]     # En push a main
+    branches: [main]     # On push to main
 ```
 
-### Configurar Notificaciones
-Agregar steps de notificación:
+### Configure Notifications
+Add notification steps:
 ```yaml
 - name: 📧 Notify on failure
   if: failure()
   uses: actions/slack@v1
-  # ... configuración
+  # ... configuration
 ```
 
-## 🎯 Mejores Prácticas
+## 🎯 Best Practices
 
-### Para Desarrollo
-1. Usar workflow `e2e-tests.yml` en PRs
-2. Revisar evidencia de bugs automática
-3. Monitorear métricas de performance
+### For Development
+1. Use the `e2e-tests.yml` workflow on PRs
+2. Review automatic bug evidence
+3. Monitor performance metrics
 
-### Para CI/CD
-1. Configurar `regression.yml` en main branch
-2. Usar results de `performance.yml` para optimizar
-3. Revisar reportes de `security.yml` regularmente
+### For CI/CD
+1. Configure `regression.yml` on the main branch
+2. Use `performance.yml` results to optimize
+3. Regularly review `security.yml` reports
 
-### Para Mantenimiento
-1. Archivar artifacts después de 30-90 días
-2. Revisar y actualizar payloads de seguridad
-3. Optimizar configuración de workers basado en performance
+### For Maintenance
+1. Archive artifacts after 30–90 days
+2. Update security payloads periodically
+3. Optimize worker configuration based on performance
 
-## 📈 Monitoreo y Métricas
+## 📈 Monitoring and Metrics
 
-### KPIs Principales
-- **Success Rate**: Porcentaje de tests que pasan
-- **Performance Baseline**: Tiempo de ejecución estándar
-- **Security Score**: Vulnerabilidades detectadas
-- **Regression Detection**: Fallos introducidos
+### Key KPIs
+- **Success Rate**: Percentage of passing tests
+- **Performance Baseline**: Standard execution time
+- **Security Score**: Detected vulnerabilities
+- **Regression Detection**: Newly introduced failures
 
-### Alertas Automáticas
-- Fallos en testing de regresión
-- Degradación de performance > 20%
-- Nuevas vulnerabilidades de seguridad
-- Coverage de tests < 80%
+### Automatic Alerts
+- Regression test failures
+- Performance degradation > 20%
+- New security vulnerabilities
+- Test coverage < 80%
 
-## 🔗 Enlaces Útiles
+## 🔗 Useful Links
 
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [Playwright Documentation](https://playwright.dev/)
 - [ParaBank Application](https://parabank.parasoft.com/parabank)
 - [Project Documentation](./documentation/)
 
-## 🤝 Contribuir
+## 🤝 Contributing
 
-1. Fork el proyecto
-2. Crear feature branch
-3. Agregar/modificar tests según necesidad
-4. Verificar que workflows pasan
-5. Crear Pull Request
+1. Fork the project
+2. Create a feature branch
+3. Add/modify tests as needed
+4. Ensure workflows pass
+5. Create a Pull Request
 
-Los workflows automáticamente:
-- Ejecutarán tests de regresión
-- Capturarán evidencia de fallos
-- Comentarán en el PR con resultados
-- Bloquearán merge si hay regresiones
+Workflows will automatically:
+- Run regression tests
+- Capture failure evidence
+- Comment on the PR with results
+- Block merge if regressions are detected
 
 ---
 
-**Nota**: Todos los workflows están diseñados para fallar gracefully y proporcionar máxima información para debugging y mejora continua del proyecto.
+**Note**: All workflows are designed to fail gracefully and provide maximum information for debugging and continuous improvement.
+
