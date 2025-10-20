@@ -148,4 +148,4 @@ Add to package.json for convenience:
 
 ---
 
-Follow these steps to reliably install, run, and debug the test suite. Adjust BASE_URL and timeouts as needed for your environment..
+Follow these steps to reliably install, run, and debug the test suite. Adjust BASE_URL and timeouts as needed for your environment.
