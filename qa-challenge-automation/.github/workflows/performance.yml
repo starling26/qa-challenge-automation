@@ -1,0 +1,238 @@
+name: ⚡ Performance Testing - ParaBank
+
+on:
+  schedule:
+    # Ejecutar tests de performance cada domingo a las 4:00 AM UTC
+    - cron: '0 4 * * 0'
+  workflow_dispatch:
+    inputs:
+      performance_type:
+        description: 'Tipo de test de performance'
+        required: true
+        default: 'standard'
+        type: choice
+        options:
+          - standard
+          - stress
+          - load
+          - endurance
+
+env:
+  BASE_URL: https://parabank.parasoft.com/parabank
+
+jobs:
+  performance-baseline:
+    name: 📊 Performance Baseline
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        workers: [1, 3, 5]
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎭 Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: 📁 Create performance directories
+        run: |
+          mkdir -p performance-results
+          mkdir -p performance-screenshots
+
+      - name: ⚡ Run Performance Tests
+        run: |
+          echo "🚀 Starting performance test with ${{ matrix.workers }} workers"
+          start_time=$(date +%s)
+          
+          case "${{ github.event.inputs.performance_type || 'standard' }}" in
+            "stress")
+              echo "🔥 Running STRESS test (20 tests, 10 repetitions)"
+              for i in {1..10}; do
+                npx playwright test --workers=${{ matrix.workers }} \
+                  --reporter=json \
+                  --output=performance-results/stress-run-$i.json
+              done
+              ;;
+            "load")
+              echo "📈 Running LOAD test (50 parallel tests)"
+              npx playwright test --workers=${{ matrix.workers }} \
+                --repeat-each=50 \
+                --reporter=json \
+                --output=performance-results/load-test.json
+              ;;
+            "endurance")
+              echo "🏃 Running ENDURANCE test (2 hours continuous)"
+              timeout 7200 bash -c 'while true; do 
+                npx playwright test --workers=${{ matrix.workers }} \
+                  --reporter=json \
+                  --output=performance-results/endurance-$(date +%s).json
+                sleep 60
+              done'
+              ;;
+            *)
+              echo "📊 Running STANDARD performance test"
+              npx playwright test --workers=${{ matrix.workers }} \
+                --reporter=json \
+                --output=performance-results/standard-test.json
+              ;;
+          esac
+          
+          end_time=$(date +%s)
+          duration=$((end_time - start_time))
+          echo "⏱️ Total execution time: ${duration} seconds" > performance-results/timing-${{ matrix.workers }}-workers.txt
+
+      - name: 📊 Generate Performance Report
+        run: |
+          echo "# ⚡ Performance Test Results" > performance-report-${{ matrix.workers }}.md
+          echo "" >> performance-report-${{ matrix.workers }}.md
+          echo "**Test Type**: ${{ github.event.inputs.performance_type || 'standard' }}" >> performance-report-${{ matrix.workers }}.md
+          echo "**Workers**: ${{ matrix.workers }}" >> performance-report-${{ matrix.workers }}.md
+          echo "**Date**: $(date)" >> performance-report-${{ matrix.workers }}.md
+          echo "**Commit**: ${{ github.sha }}" >> performance-report-${{ matrix.workers }}.md
+          echo "" >> performance-report-${{ matrix.workers }}.md
+          
+          if [ -f performance-results/timing-${{ matrix.workers }}-workers.txt ]; then
+            echo "## ⏱️ Execution Time" >> performance-report-${{ matrix.workers }}.md
+            cat performance-results/timing-${{ matrix.workers }}-workers.txt >> performance-report-${{ matrix.workers }}.md
+            echo "" >> performance-report-${{ matrix.workers }}.md
+          fi
+          
+          echo "## 📈 Performance Metrics" >> performance-report-${{ matrix.workers }}.md
+          echo "- **Browser**: Chromium" >> performance-report-${{ matrix.workers }}.md
+          echo "- **Parallel Workers**: ${{ matrix.workers }}" >> performance-report-${{ matrix.workers }}.md
+          echo "- **Test Count**: $(ls tests/*.spec.ts | wc -l) test files" >> performance-report-${{ matrix.workers }}.md
+          echo "" >> performance-report-${{ matrix.workers }}.md
+          
+          echo "## 📁 Generated Files" >> performance-report-${{ matrix.workers }}.md
+          echo "\`\`\`" >> performance-report-${{ matrix.workers }}.md
+          ls -la performance-results/ >> performance-report-${{ matrix.workers }}.md
+          echo "\`\`\`" >> performance-report-${{ matrix.workers }}.md
+
+      - name: 📊 Upload performance results
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-results-${{ matrix.workers }}-workers
+          path: |
+            performance-results/
+            performance-report-${{ matrix.workers }}.md
+          retention-days: 60
+
+  performance-comparison:
+    name: 📈 Performance Comparison
+    runs-on: ubuntu-latest
+    needs: performance-baseline
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📥 Download all performance results
+        uses: actions/download-artifact@v4
+        with:
+          path: ./performance-data
+
+      - name: 📊 Generate Comparison Report
+        run: |
+          echo "# 📊 Performance Comparison Report" > performance-comparison.md
+          echo "" >> performance-comparison.md
+          echo "**Generated**: $(date)" >> performance-comparison.md
+          echo "**Test Type**: ${{ github.event.inputs.performance_type || 'standard' }}" >> performance-comparison.md
+          echo "**Workflow Run**: ${{ github.run_number }}" >> performance-comparison.md
+          echo "" >> performance-comparison.md
+          
+          echo "## ⚡ Worker Performance Comparison" >> performance-comparison.md
+          echo "" >> performance-comparison.md
+          echo "| Workers | Execution Time | Efficiency | Status |" >> performance-comparison.md
+          echo "|---------|---------------|------------|---------|" >> performance-comparison.md
+          
+          for workers in 1 3 5; do
+            if [ -f "./performance-data/performance-results-${workers}-workers/timing-${workers}-workers.txt" ]; then
+              timing=$(cat "./performance-data/performance-results-${workers}-workers/timing-${workers}-workers.txt" | grep -o '[0-9]\+ seconds' | grep -o '[0-9]\+')
+              if [ "$workers" = "1" ]; then
+                baseline_time=$timing
+                efficiency="100%"
+              else
+                if [ -n "$baseline_time" ] && [ "$baseline_time" -gt 0 ]; then
+                  efficiency_calc=$(echo "scale=1; ($baseline_time / $timing) * 100" | bc)
+                  efficiency="${efficiency_calc}%"
+                else
+                  efficiency="N/A"
+                fi
+              fi
+              
+              status="✅ Completed"
+              echo "| $workers | ${timing}s | $efficiency | $status |" >> performance-comparison.md
+            else
+              echo "| $workers | N/A | N/A | ❌ Failed |" >> performance-comparison.md
+            fi
+          done
+          
+          echo "" >> performance-comparison.md
+          echo "## 📈 Performance Insights" >> performance-comparison.md
+          echo "" >> performance-comparison.md
+          echo "### 🎯 Recommendations:" >> performance-comparison.md
+          echo "- **Optimal Workers**: Based on execution times above" >> performance-comparison.md
+          echo "- **CI/CD Settings**: Use 3 workers for best balance" >> performance-comparison.md
+          echo "- **Local Development**: Use 1 worker for debugging" >> performance-comparison.md
+          echo "" >> performance-comparison.md
+          
+          echo "## 📊 Historical Trends" >> performance-comparison.md
+          echo "*(Future enhancement: Track performance over time)*" >> performance-comparison.md
+          echo "" >> performance-comparison.md
+          
+          echo "## 🔗 Detailed Reports" >> performance-comparison.md
+          echo "Download individual worker reports from artifacts:" >> performance-comparison.md
+          for workers in 1 3 5; do
+            echo "- [${workers} Workers Report](./performance-results-${workers}-workers/)" >> performance-comparison.md
+          done
+
+      - name: 📊 Upload comparison report
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-comparison-report
+          path: performance-comparison.md
+          retention-days: 90
+
+      - name: 📈 Update Performance Badge
+        run: |
+          # Calcular el mejor tiempo de ejecución
+          best_time=999999
+          best_workers=1
+          
+          for workers in 1 3 5; do
+            timing_file="./performance-data/performance-results-${workers}-workers/timing-${workers}-workers.txt"
+            if [ -f "$timing_file" ]; then
+              timing=$(cat "$timing_file" | grep -o '[0-9]\+ seconds' | grep -o '[0-9]\+')
+              if [ "$timing" -lt "$best_time" ]; then
+                best_time=$timing
+                best_workers=$workers
+              fi
+            fi
+          done
+          
+          echo "🏆 Best performance: ${best_time}s with ${best_workers} workers"
+          
+          # Crear badge data
+          badge_color="green"
+          if [ "$best_time" -gt 120 ]; then
+            badge_color="red"
+          elif [ "$best_time" -gt 60 ]; then
+            badge_color="yellow"
+          fi
+          
+          echo "Performance-${best_time}s-${badge_color}" > performance-badge.txt
+
+      - name: 📊 Upload performance badge
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-badge
+          path: performance-badge.txt
+          retention-days: 30

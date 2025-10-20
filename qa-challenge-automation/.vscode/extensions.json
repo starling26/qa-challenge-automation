@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "ms-playwright.playwright",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "yzhang.markdown-all-in-one",
+    "shd101wyy.markdown-preview-enhanced",
+    "aaron-bond.better-comments",
+    "PKief.material-icon-theme",
+    "github.vscode-github-actions"
+  ]
+}

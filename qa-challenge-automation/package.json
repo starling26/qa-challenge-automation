@@ -1,0 +1,36 @@
+{
+  "name": "magento-qa-automation",
+  "version": "1.0.0",
+  "description": "QA Challenge Exercise 2 - Contact Form Automation with Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:chrome": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:safari": "playwright test --project=webkit",
+    "test:all-browsers": "playwright test --project=chromium --project=firefox --project=webkit",
+    "test:report": "playwright show-report",
+    "test:ui": "playwright test --ui",
+    "test:codegen": "playwright codegen https://magento.softwaretestingboard.com",
+    "install:browsers": "playwright install",
+    "create-zip": "node scripts/create-zip.js",
+    "clean": "rm -rf node_modules test-results playwright-report package-lock.json",
+    "setup": "npm install && npm run install:browsers"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "qa",
+    "automation",
+    "testing"
+  ],
+  "author": "QA Challenge Candidate",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  }
+}

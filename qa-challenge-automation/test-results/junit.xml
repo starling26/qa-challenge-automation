@@ -1,0 +1,218 @@
+<testsuites id="" name="" tests="4" failures="4" skipped="0" errors="0" time="6.404440999999642">
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T02:52:37.541Z" hostname="chromium" tests="1" failures="1" skipped="0" time="4.767" errors="0">
+<testcase name="Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login" classname="contact-form.spec.ts" time="4.767">
+<failure message="contact-form.spec.ts:373:7 TC_AUTO_013: Verify correct page load after login" type="FAILURE">
+<![CDATA[  [chromium] › contact-form.spec.ts:373:7 › Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login › Verify successful redirection to Accounts Overview page 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('h1.title, .title')
+    Expected: visible
+    Error: strict mode violation: locator('h1.title, .title') resolved to 2 elements:
+        1) <h1 class="title">↵⇆⇆⇆Accounts Overview↵⇆⇆</h1> aka getByRole('heading', { name: 'Accounts Overview' })
+        2) <h1 class="title">↵⇆⇆⇆Error!↵⇆⇆</h1> aka getByText('Error!')
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('h1.title, .title')
+
+
+      402 |       // Verify welcome message
+      403 |       const welcomeMessage = page.locator('h1.title, .title');
+    > 404 |       await expect(welcomeMessage).toBeVisible();
+          |                                    ^
+      405 |       console.log('✓ Welcome message is visible');
+      406 |
+      407 |       // Verify left sidebar menu
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:404:36
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:391:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[✓ Navigated to ParaBank homepage
+✓ Login attempted with credentials
+✓ Redirected to correct URL: https://parabank.parasoft.com/parabank/overview.htm
+✓ Page title: ParaBank | Accounts Overview
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/video.webm]]
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T02:52:37.541Z" hostname="firefox" tests="1" failures="1" skipped="0" time="4.402" errors="0">
+<testcase name="Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login" classname="contact-form.spec.ts" time="4.402">
+<failure message="contact-form.spec.ts:373:7 TC_AUTO_013: Verify correct page load after login" type="FAILURE">
+<![CDATA[  [firefox] › contact-form.spec.ts:373:7 › Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login › Verify successful redirection to Accounts Overview page 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('h1.title, .title')
+    Expected: visible
+    Error: strict mode violation: locator('h1.title, .title') resolved to 2 elements:
+        1) <h1 class="title">↵⇆⇆⇆Accounts Overview↵⇆⇆</h1> aka getByRole('heading', { name: 'Accounts Overview' })
+        2) <h1 class="title">↵⇆⇆⇆Error!↵⇆⇆</h1> aka getByText('Error!')
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('h1.title, .title')
+
+
+      402 |       // Verify welcome message
+      403 |       const welcomeMessage = page.locator('h1.title, .title');
+    > 404 |       await expect(welcomeMessage).toBeVisible();
+          |                                    ^
+      405 |       console.log('✓ Welcome message is visible');
+      406 |
+      407 |       // Verify left sidebar menu
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:404:36
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:391:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[✓ Navigated to ParaBank homepage
+✓ Login attempted with credentials
+✓ Redirected to correct URL: https://parabank.parasoft.com/parabank/overview.htm
+✓ Page title: ParaBank | Accounts Overview
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/video.webm]]
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T02:52:37.541Z" hostname="Mobile Chrome" tests="1" failures="1" skipped="0" time="4.807" errors="0">
+<testcase name="Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login" classname="contact-form.spec.ts" time="4.807">
+<failure message="contact-form.spec.ts:373:7 TC_AUTO_013: Verify correct page load after login" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › contact-form.spec.ts:373:7 › Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login › Verify successful redirection to Accounts Overview page 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('h1.title, .title')
+    Expected: visible
+    Error: strict mode violation: locator('h1.title, .title') resolved to 2 elements:
+        1) <h1 class="title">↵⇆⇆⇆Accounts Overview↵⇆⇆</h1> aka getByRole('heading', { name: 'Accounts Overview' })
+        2) <h1 class="title">↵⇆⇆⇆Error!↵⇆⇆</h1> aka getByText('Error!')
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('h1.title, .title')
+
+
+      402 |       // Verify welcome message
+      403 |       const welcomeMessage = page.locator('h1.title, .title');
+    > 404 |       await expect(welcomeMessage).toBeVisible();
+          |                                    ^
+      405 |       console.log('✓ Welcome message is visible');
+      406 |
+      407 |       // Verify left sidebar menu
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:404:36
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:391:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[✓ Navigated to ParaBank homepage
+✓ Login attempted with credentials
+✓ Redirected to correct URL: https://parabank.parasoft.com/parabank/overview.htm
+✓ Page title: ParaBank | Accounts Overview
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T02:52:37.541Z" hostname="Mobile Safari" tests="1" failures="1" skipped="0" time="4.909" errors="0">
+<testcase name="Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login" classname="contact-form.spec.ts" time="4.909">
+<failure message="contact-form.spec.ts:373:7 TC_AUTO_013: Verify correct page load after login" type="FAILURE">
+<![CDATA[  [Mobile Safari] › contact-form.spec.ts:373:7 › Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login › Verify successful redirection to Accounts Overview page 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('h1.title, .title')
+    Expected: visible
+    Error: strict mode violation: locator('h1.title, .title') resolved to 2 elements:
+        1) <h1 class="title">↵⇆⇆⇆Accounts Overview↵⇆⇆</h1> aka getByRole('heading', { name: 'Accounts Overview' })
+        2) <h1 class="title">↵⇆⇆⇆Error!↵⇆⇆</h1> aka getByText('Error!')
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('h1.title, .title')
+
+
+      402 |       // Verify welcome message
+      403 |       const welcomeMessage = page.locator('h1.title, .title');
+    > 404 |       await expect(welcomeMessage).toBeVisible();
+          |                                    ^
+      405 |       console.log('✓ Welcome message is visible');
+      406 |
+      407 |       // Verify left sidebar menu
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:404:36
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:391:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[✓ Navigated to ParaBank homepage
+✓ Login attempted with credentials
+✓ Redirected to correct URL: https://parabank.parasoft.com/parabank/overview.htm
+✓ Page title: ParaBank | Accounts Overview
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

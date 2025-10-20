@@ -1,0 +1,126 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link:
+        - /url: admin.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - img [ref=e4]
+      - link "ParaBank":
+        - /url: index.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - img "ParaBank" [ref=e5]
+      - paragraph [ref=e6]: Experience the difference
+    - generic [ref=e7]:
+      - list [ref=e8]:
+        - listitem [ref=e9]: Solutions
+        - listitem [ref=e10]:
+          - link "About Us" [ref=e11]:
+            - /url: about.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - listitem [ref=e12]:
+          - link "Services" [ref=e13]:
+            - /url: services.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - listitem [ref=e14]:
+          - link "Products" [ref=e15]:
+            - /url: http://www.parasoft.com/jsp/products.jsp
+        - listitem [ref=e16]:
+          - link "Locations" [ref=e17]:
+            - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - listitem [ref=e18]:
+          - link "Admin Page" [ref=e19]:
+            - /url: admin.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "home" [ref=e22]:
+            - /url: index.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - listitem [ref=e23]:
+          - link "about" [ref=e24]:
+            - /url: about.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - listitem [ref=e25]:
+          - link "contact" [ref=e26]:
+            - /url: contact.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - heading "Customer Login" [level=2] [ref=e29]
+        - generic [ref=e30]:
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: Username
+            - textbox [ref=e34]
+            - paragraph [ref=e35]: Password
+            - textbox [ref=e37]
+            - button "Log In" [ref=e39] [cursor=pointer]
+          - paragraph [ref=e40]:
+            - link "Forgot login info?" [ref=e41]:
+              - /url: lookup.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+          - paragraph [ref=e42]:
+            - link "Register" [ref=e43]:
+              - /url: register.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+      - generic [ref=e44]:
+        - heading "Customer Care" [level=1] [ref=e45]
+        - paragraph [ref=e46]: Email support is available by filling out the following form.
+        - table [ref=e48]:
+          - rowgroup [ref=e49]:
+            - 'row "Name: Starling" [ref=e50]':
+              - cell "Name:" [ref=e51]
+              - cell "Starling" [ref=e52]:
+                - textbox [active] [ref=e53]: Starling
+              - cell [ref=e54]
+            - row "Email:" [ref=e55]:
+              - cell "Email:" [ref=e56]
+              - cell [ref=e57]:
+                - textbox [ref=e58]
+              - cell [ref=e59]
+            - row "Phone:" [ref=e60]:
+              - cell "Phone:" [ref=e61]
+              - cell [ref=e62]:
+                - textbox [ref=e63]
+              - cell [ref=e64]
+            - row "Message:" [ref=e65]:
+              - cell "Message:" [ref=e66]
+              - cell [ref=e67]:
+                - textbox [ref=e68]
+              - cell [ref=e69]
+            - row "Send to Customer Care" [ref=e70]:
+              - cell [ref=e71]
+              - cell "Send to Customer Care" [ref=e72]:
+                - button "Send to Customer Care" [ref=e73] [cursor=pointer]
+  - generic [ref=e75]:
+    - list [ref=e76]:
+      - listitem [ref=e77]:
+        - link "Home" [ref=e78]:
+          - /url: index.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - text: "|"
+      - listitem [ref=e79]:
+        - link "About Us" [ref=e80]:
+          - /url: about.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - text: "|"
+      - listitem [ref=e81]:
+        - link "Services" [ref=e82]:
+          - /url: services.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - text: "|"
+      - listitem [ref=e83]:
+        - link "Products" [ref=e84]:
+          - /url: http://www.parasoft.com/jsp/products.jsp
+        - text: "|"
+      - listitem [ref=e85]:
+        - link "Locations" [ref=e86]:
+          - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
+        - text: "|"
+      - listitem [ref=e87]:
+        - link "Forum" [ref=e88]:
+          - /url: http://forums.parasoft.com/
+        - text: "|"
+      - listitem [ref=e89]:
+        - link "Site Map" [ref=e90]:
+          - /url: sitemap.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+        - text: "|"
+      - listitem [ref=e91]:
+        - link "Contact Us" [ref=e92]:
+          - /url: contact.htm;jsessionid=CB4C25C2A1148FBD182F17FB4BAE76FF
+    - paragraph [ref=e93]: © Parasoft. All rights reserved.
+    - list [ref=e94]:
+      - listitem [ref=e95]: "Visit us at:"
+      - listitem [ref=e96]:
+        - link "www.parasoft.com" [ref=e97]:
+          - /url: http://www.parasoft.com/
+```
