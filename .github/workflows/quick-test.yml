@@ -4,9 +4,9 @@ on:
   push:
     branches: [ main, develop, feature/* ]
     paths:
-      - 'tests/**'
-      - 'playwright.config.ts'
-      - 'package.json'
+      - 'qa-challenge-automation/tests/**'
+      - 'qa-challenge-automation/playwright.config.ts'
+      - 'qa-challenge-automation/package.json'
       - '.github/workflows/**'
 
 env:
@@ -17,6 +17,10 @@ jobs:
     name: 🚀 Quick Validation
     runs-on: ubuntu-latest
     
+    defaults:
+      run:
+        working-directory: ./qa-challenge-automation
+    
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
@@ -26,6 +30,7 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+          cache-dependency-path: './qa-challenge-automation/package-lock.json'
 
       - name: 📦 Install dependencies
         run: |
@@ -35,17 +40,30 @@ jobs:
             npm install
           fi
 
-      - name: 🎭 Install Playwright
-        run: npx playwright install chromium
+      - name: 🎭 Install Playwright browsers and dependencies
+        run: |
+          npx playwright install chromium
+          npx playwright install-deps chromium
 
       - name: 🧪 Run smoke tests
         run: |
           echo "🚀 Running quick smoke tests on push..."
           npx playwright test \
             --project=chromium \
-            --grep="TC01|TC02|TC04" \
-            --reporter=line
+            --grep="TC01|TC02|TC03" \
+            --reporter=line \
+            --max-failures=3
         continue-on-error: true
+
+      - name: 📊 Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quick-test-results
+          path: |
+            qa-challenge-automation/test-results/
+            qa-challenge-automation/playwright-report/
+          retention-days: 7
 
       - name: 📊 Quick status
         run: |

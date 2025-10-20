@@ -39,6 +39,10 @@ jobs:
           - os: ubuntu-latest
             browser: mobile-safari
     
+    defaults:
+      run:
+        working-directory: ./qa-challenge-automation
+    
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
@@ -48,6 +52,7 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+          cache-dependency-path: './qa-challenge-automation/package-lock.json'
 
       - name: 📦 Install dependencies
         run: |
@@ -82,7 +87,7 @@ jobs:
           echo "💨 Running smoke tests"
           npx playwright test \
             --project=${{ matrix.browser }} \
-            --grep="TC01|TC02|TC04" \
+            --grep="TC01|TC02|TC03" \
             --reporter=html,junit \
             --output-dir=test-results
         continue-on-error: true
@@ -191,11 +196,11 @@ jobs:
         with:
           name: test-results-${{ matrix.os }}-${{ matrix.browser }}
           path: |
-            test-results/
-            test-evidence/
-            screenshots/
-            test-report-${{ matrix.os }}-${{ matrix.browser }}.md
-            playwright-report/
+            qa-challenge-automation/test-results/
+            qa-challenge-automation/test-evidence/
+            qa-challenge-automation/screenshots/
+            qa-challenge-automation/test-report-${{ matrix.os }}-${{ matrix.browser }}.md
+            qa-challenge-automation/playwright-report/
           retention-days: 30
 
   test-summary:
