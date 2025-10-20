@@ -1,216 +1,200 @@
-<testsuites id="" name="" tests="4" failures="4" skipped="0" errors="0" time="6.404440999999642">
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T02:52:37.541Z" hostname="chromium" tests="1" failures="1" skipped="0" time="4.767" errors="0">
-<testcase name="Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login" classname="contact-form.spec.ts" time="4.767">
-<failure message="contact-form.spec.ts:373:7 TC_AUTO_013: Verify correct page load after login" type="FAILURE">
-<![CDATA[  [chromium] › contact-form.spec.ts:373:7 › Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login › Verify successful redirection to Accounts Overview page 
+<testsuites id="" name="" tests="4" failures="4" skipped="0" errors="0" time="10.577420000000043">
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T04:48:20.604Z" hostname="chromium" tests="1" failures="1" skipped="0" time="8.123" errors="0">
+<testcase name="Contact Form Validation Tests › TC_AUTO_014: Validate table structure" classname="contact-form.spec.ts" time="8.123">
+<failure message="contact-form.spec.ts:484:7 TC_AUTO_014: Validate table structure" type="FAILURE">
+<![CDATA[  [chromium] › contact-form.spec.ts:484:7 › Contact Form Validation Tests › TC_AUTO_014: Validate table structure › Validate table structure and headers 
 
     Error: expect(locator).toBeVisible() failed
 
-    Locator: locator('h1.title, .title')
+    Locator: locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first()
     Expected: visible
-    Error: strict mode violation: locator('h1.title, .title') resolved to 2 elements:
-        1) <h1 class="title">↵⇆⇆⇆Accounts Overview↵⇆⇆</h1> aka getByRole('heading', { name: 'Accounts Overview' })
-        2) <h1 class="title">↵⇆⇆⇆Error!↵⇆⇆</h1> aka getByText('Error!')
+    Timeout: 5000ms
+    Error: element(s) not found
 
     Call log:
       - Expect "toBeVisible" with timeout 5000ms
-      - waiting for locator('h1.title, .title')
+      - waiting for locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first()
 
 
-      402 |       // Verify welcome message
-      403 |       const welcomeMessage = page.locator('h1.title, .title');
-    > 404 |       await expect(welcomeMessage).toBeVisible();
-          |                                    ^
-      405 |       console.log('✓ Welcome message is visible');
-      406 |
-      407 |       // Verify left sidebar menu
-        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:404:36
-        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:391:5
+      497 |       // Locate the accounts table specifically by content
+      498 |       const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
+    > 499 |       await expect(accountsTable).toBeVisible();
+          |                                   ^
+      500 |
+      501 |       // Count number of columns by checking header cells in the correct table
+      502 |       const headerCells = accountsTable.locator('tr').first().locator('td, th');
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:499:35
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:496:16
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/test-failed-1.png
+    ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-chromium/test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/video.webm
+    ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-chromium/video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    Error Context: ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/error-context.md
+    Error Context: ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-chromium/error-context.md
 ]]>
 </failure>
 <system-out>
-<![CDATA[✓ Navigated to ParaBank homepage
-✓ Login attempted with credentials
-✓ Redirected to correct URL: https://parabank.parasoft.com/parabank/overview.htm
-✓ Page title: ParaBank | Accounts Overview
+<![CDATA[✓ Logged in and navigated to Accounts Overview
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/test-failed-1.png]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-chromium/test-failed-1.png]]
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/video.webm]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-chromium/video.webm]]
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-chromium/error-context.md]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-chromium/error-context.md]]
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T02:52:37.541Z" hostname="firefox" tests="1" failures="1" skipped="0" time="4.402" errors="0">
-<testcase name="Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login" classname="contact-form.spec.ts" time="4.402">
-<failure message="contact-form.spec.ts:373:7 TC_AUTO_013: Verify correct page load after login" type="FAILURE">
-<![CDATA[  [firefox] › contact-form.spec.ts:373:7 › Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login › Verify successful redirection to Accounts Overview page 
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T04:48:20.604Z" hostname="firefox" tests="1" failures="1" skipped="0" time="8.741" errors="0">
+<testcase name="Contact Form Validation Tests › TC_AUTO_014: Validate table structure" classname="contact-form.spec.ts" time="8.741">
+<failure message="contact-form.spec.ts:484:7 TC_AUTO_014: Validate table structure" type="FAILURE">
+<![CDATA[  [firefox] › contact-form.spec.ts:484:7 › Contact Form Validation Tests › TC_AUTO_014: Validate table structure › Validate table structure and headers 
 
     Error: expect(locator).toBeVisible() failed
 
-    Locator: locator('h1.title, .title')
+    Locator: locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first()
     Expected: visible
-    Error: strict mode violation: locator('h1.title, .title') resolved to 2 elements:
-        1) <h1 class="title">↵⇆⇆⇆Accounts Overview↵⇆⇆</h1> aka getByRole('heading', { name: 'Accounts Overview' })
-        2) <h1 class="title">↵⇆⇆⇆Error!↵⇆⇆</h1> aka getByText('Error!')
+    Timeout: 5000ms
+    Error: element(s) not found
 
     Call log:
       - Expect "toBeVisible" with timeout 5000ms
-      - waiting for locator('h1.title, .title')
+      - waiting for locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first()
 
 
-      402 |       // Verify welcome message
-      403 |       const welcomeMessage = page.locator('h1.title, .title');
-    > 404 |       await expect(welcomeMessage).toBeVisible();
-          |                                    ^
-      405 |       console.log('✓ Welcome message is visible');
-      406 |
-      407 |       // Verify left sidebar menu
-        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:404:36
-        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:391:5
+      497 |       // Locate the accounts table specifically by content
+      498 |       const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
+    > 499 |       await expect(accountsTable).toBeVisible();
+          |                                   ^
+      500 |
+      501 |       // Count number of columns by checking header cells in the correct table
+      502 |       const headerCells = accountsTable.locator('tr').first().locator('td, th');
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:499:35
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:496:16
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/test-failed-1.png
+    ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-firefox/test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/video.webm
+    ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-firefox/video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    Error Context: ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/error-context.md
+    Error Context: ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-firefox/error-context.md
 ]]>
 </failure>
 <system-out>
-<![CDATA[✓ Navigated to ParaBank homepage
-✓ Login attempted with credentials
-✓ Redirected to correct URL: https://parabank.parasoft.com/parabank/overview.htm
-✓ Page title: ParaBank | Accounts Overview
+<![CDATA[✓ Logged in and navigated to Accounts Overview
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/test-failed-1.png]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-firefox/test-failed-1.png]]
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/video.webm]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-firefox/video.webm]]
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-firefox/error-context.md]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-firefox/error-context.md]]
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T02:52:37.541Z" hostname="Mobile Chrome" tests="1" failures="1" skipped="0" time="4.807" errors="0">
-<testcase name="Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login" classname="contact-form.spec.ts" time="4.807">
-<failure message="contact-form.spec.ts:373:7 TC_AUTO_013: Verify correct page load after login" type="FAILURE">
-<![CDATA[  [Mobile Chrome] › contact-form.spec.ts:373:7 › Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login › Verify successful redirection to Accounts Overview page 
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T04:48:20.604Z" hostname="Mobile Chrome" tests="1" failures="1" skipped="0" time="8.172" errors="0">
+<testcase name="Contact Form Validation Tests › TC_AUTO_014: Validate table structure" classname="contact-form.spec.ts" time="8.172">
+<failure message="contact-form.spec.ts:484:7 TC_AUTO_014: Validate table structure" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › contact-form.spec.ts:484:7 › Contact Form Validation Tests › TC_AUTO_014: Validate table structure › Validate table structure and headers 
 
     Error: expect(locator).toBeVisible() failed
 
-    Locator: locator('h1.title, .title')
+    Locator: locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first()
     Expected: visible
-    Error: strict mode violation: locator('h1.title, .title') resolved to 2 elements:
-        1) <h1 class="title">↵⇆⇆⇆Accounts Overview↵⇆⇆</h1> aka getByRole('heading', { name: 'Accounts Overview' })
-        2) <h1 class="title">↵⇆⇆⇆Error!↵⇆⇆</h1> aka getByText('Error!')
+    Timeout: 5000ms
+    Error: element(s) not found
 
     Call log:
       - Expect "toBeVisible" with timeout 5000ms
-      - waiting for locator('h1.title, .title')
+      - waiting for locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first()
 
 
-      402 |       // Verify welcome message
-      403 |       const welcomeMessage = page.locator('h1.title, .title');
-    > 404 |       await expect(welcomeMessage).toBeVisible();
-          |                                    ^
-      405 |       console.log('✓ Welcome message is visible');
-      406 |
-      407 |       // Verify left sidebar menu
-        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:404:36
-        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:391:5
+      497 |       // Locate the accounts table specifically by content
+      498 |       const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
+    > 499 |       await expect(accountsTable).toBeVisible();
+          |                                   ^
+      500 |
+      501 |       // Count number of columns by checking header cells in the correct table
+      502 |       const headerCells = accountsTable.locator('tr').first().locator('td, th');
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:499:35
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:496:16
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/test-failed-1.png
+    ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Chrome/test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/video.webm
+    ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Chrome/video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    Error Context: ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/error-context.md
+    Error Context: ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Chrome/error-context.md
 ]]>
 </failure>
 <system-out>
-<![CDATA[✓ Navigated to ParaBank homepage
-✓ Login attempted with credentials
-✓ Redirected to correct URL: https://parabank.parasoft.com/parabank/overview.htm
-✓ Page title: ParaBank | Accounts Overview
+<![CDATA[✓ Logged in and navigated to Accounts Overview
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/test-failed-1.png]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Chrome/test-failed-1.png]]
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/video.webm]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Chrome/video.webm]]
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Chrome/error-context.md]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Chrome/error-context.md]]
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T02:52:37.541Z" hostname="Mobile Safari" tests="1" failures="1" skipped="0" time="4.909" errors="0">
-<testcase name="Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login" classname="contact-form.spec.ts" time="4.909">
-<failure message="contact-form.spec.ts:373:7 TC_AUTO_013: Verify correct page load after login" type="FAILURE">
-<![CDATA[  [Mobile Safari] › contact-form.spec.ts:373:7 › Contact Form Validation Tests › TC_AUTO_013: Verify correct page load after login › Verify successful redirection to Accounts Overview page 
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-20T04:48:20.604Z" hostname="Mobile Safari" tests="1" failures="1" skipped="0" time="8.183" errors="0">
+<testcase name="Contact Form Validation Tests › TC_AUTO_014: Validate table structure" classname="contact-form.spec.ts" time="8.183">
+<failure message="contact-form.spec.ts:484:7 TC_AUTO_014: Validate table structure" type="FAILURE">
+<![CDATA[  [Mobile Safari] › contact-form.spec.ts:484:7 › Contact Form Validation Tests › TC_AUTO_014: Validate table structure › Validate table structure and headers 
 
     Error: expect(locator).toBeVisible() failed
 
-    Locator: locator('h1.title, .title')
+    Locator: locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first()
     Expected: visible
-    Error: strict mode violation: locator('h1.title, .title') resolved to 2 elements:
-        1) <h1 class="title">↵⇆⇆⇆Accounts Overview↵⇆⇆</h1> aka getByRole('heading', { name: 'Accounts Overview' })
-        2) <h1 class="title">↵⇆⇆⇆Error!↵⇆⇆</h1> aka getByText('Error!')
+    Timeout: 5000ms
+    Error: element(s) not found
 
     Call log:
       - Expect "toBeVisible" with timeout 5000ms
-      - waiting for locator('h1.title, .title')
+      - waiting for locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first()
 
 
-      402 |       // Verify welcome message
-      403 |       const welcomeMessage = page.locator('h1.title, .title');
-    > 404 |       await expect(welcomeMessage).toBeVisible();
-          |                                    ^
-      405 |       console.log('✓ Welcome message is visible');
-      406 |
-      407 |       // Verify left sidebar menu
-        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:404:36
-        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:391:5
+      497 |       // Locate the accounts table specifically by content
+      498 |       const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
+    > 499 |       await expect(accountsTable).toBeVisible();
+          |                                   ^
+      500 |
+      501 |       // Count number of columns by checking header cells in the correct table
+      502 |       const headerCells = accountsTable.locator('tr').first().locator('td, th');
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:499:35
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:496:16
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/test-failed-1.png
+    ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Safari/test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/video.webm
+    ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Safari/video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    Error Context: ../test-results/contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/error-context.md
+    Error Context: ../test-results/contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Safari/error-context.md
 ]]>
 </failure>
 <system-out>
-<![CDATA[✓ Navigated to ParaBank homepage
-✓ Login attempted with credentials
-✓ Redirected to correct URL: https://parabank.parasoft.com/parabank/overview.htm
-✓ Page title: ParaBank | Accounts Overview
+<![CDATA[✓ Logged in and navigated to Accounts Overview
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/test-failed-1.png]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Safari/test-failed-1.png]]
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/video.webm]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Safari/video.webm]]
 
-[[ATTACHMENT|contact-form-Contact-Form--b67ce-rrect-page-load-after-login-Mobile-Safari/error-context.md]]
+[[ATTACHMENT|contact-form-Contact-Form--cc7a0-14-Validate-table-structure-Mobile-Safari/error-context.md]]
 ]]>
 </system-out>
 </testcase>

@@ -401,17 +401,6 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
     });
   });
 
-  // TEST DELIBERADAMENTE FALLIDO PARA VERIFICAR QUE LAS PRUEBAS FUNCIONAN
-  test('TC13: DEMO - Intentionally failing test to verify test execution', async ({ page }) => {
-    await test.step('This test should fail to prove tests are actually running', async () => {
-      // Fill form to trigger validation
-      await page.fill('input[name="name"]', 'Test User');
-      
-      // This assertion will fail on purpose to prove the test runner works
-      expect(false).toBe(true); // This should fail
-      console.log('❌ This test should never pass - it proves tests are working');
-    });
-  });
 
   test('TC_AUTO_013: Verify correct page load after login', async ({ page }) => {
     await test.step('Navigate to ParaBank homepage', async () => {

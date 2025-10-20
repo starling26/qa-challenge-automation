@@ -5,10 +5,10 @@
   - generic [ref=e2]:
     - generic [ref=e3]:
       - link:
-        - /url: admin.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+        - /url: admin.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - img [ref=e4]
       - link "ParaBank":
-        - /url: index.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+        - /url: index.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - img "ParaBank" [ref=e5]
       - paragraph [ref=e6]: Experience the difference
     - generic [ref=e7]:
@@ -16,10 +16,10 @@
         - listitem [ref=e9]: Solutions
         - listitem [ref=e10]:
           - link "About Us" [ref=e11]:
-            - /url: about.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+            - /url: about.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - listitem [ref=e12]:
           - link "Services" [ref=e13]:
-            - /url: services.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+            - /url: services.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - listitem [ref=e14]:
           - link "Products" [ref=e15]:
             - /url: http://www.parasoft.com/jsp/products.jsp
@@ -28,17 +28,17 @@
             - /url: http://www.parasoft.com/jsp/pr/contacts.jsp
         - listitem [ref=e18]:
           - link "Admin Page" [ref=e19]:
-            - /url: admin.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+            - /url: admin.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
       - list [ref=e20]:
         - listitem [ref=e21]:
           - link "home" [ref=e22]:
-            - /url: index.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+            - /url: index.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - listitem [ref=e23]:
           - link "about" [ref=e24]:
-            - /url: about.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+            - /url: about.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - listitem [ref=e25]:
           - link "contact" [ref=e26]:
-            - /url: contact.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+            - /url: contact.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
     - generic [ref=e27]:
       - generic [ref=e28]:
         - heading "Customer Login" [level=2] [ref=e29]
@@ -51,10 +51,10 @@
             - button "Log In" [ref=e39] [cursor=pointer]
           - paragraph [ref=e40]:
             - link "Forgot login info?" [ref=e41]:
-              - /url: lookup.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+              - /url: lookup.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
           - paragraph [ref=e42]:
             - link "Register" [ref=e43]:
-              - /url: register.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+              - /url: register.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
       - generic [ref=e44]:
         - heading "Customer Care" [level=1] [ref=e45]
         - paragraph [ref=e46]: Email support is available by filling out the following form.
@@ -88,15 +88,15 @@
     - list [ref=e76]:
       - listitem [ref=e77]:
         - link "Home" [ref=e78]:
-          - /url: index.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+          - /url: index.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - text: "|"
       - listitem [ref=e79]:
         - link "About Us" [ref=e80]:
-          - /url: about.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+          - /url: about.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - text: "|"
       - listitem [ref=e81]:
         - link "Services" [ref=e82]:
-          - /url: services.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+          - /url: services.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - text: "|"
       - listitem [ref=e83]:
         - link "Products" [ref=e84]:
@@ -112,11 +112,11 @@
         - text: "|"
       - listitem [ref=e89]:
         - link "Site Map" [ref=e90]:
-          - /url: sitemap.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+          - /url: sitemap.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
         - text: "|"
       - listitem [ref=e91]:
         - link "Contact Us" [ref=e92]:
-          - /url: contact.htm;jsessionid=2E624A2745DD461FDA98B52FD06DD944
+          - /url: contact.htm;jsessionid=B9EC3CF3AE6BA6B164896E7A1EEB2365
     - paragraph [ref=e93]: © Parasoft. All rights reserved.
     - list [ref=e94]:
       - listitem [ref=e95]: "Visit us at:"
