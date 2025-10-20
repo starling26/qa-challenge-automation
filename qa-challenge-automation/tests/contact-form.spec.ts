@@ -15,6 +15,26 @@ test.describe('Contact Form Validation Tests', () => {
     await page.waitForLoadState('networkidle');
   });
 
+  test.afterEach(async ({ page }, testInfo) => {
+    // Take screenshot if test failed and no specific failure screenshot was taken
+    if (testInfo.status !== testInfo.expectedStatus) {
+      const testName = testInfo.title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+      const screenshotPath = `screenshots/${testName}-final-failure-state.png`;
+      
+      try {
+        await page.screenshot({ path: screenshotPath });
+        console.log(`📸 Final failure state captured: ${screenshotPath}`);
+        
+        // Log additional debug info
+        const currentUrl = page.url();
+        const pageTitle = await page.title();
+        console.log(`❌ Test failed - URL: ${currentUrl}, Title: ${pageTitle}`);
+      } catch (error) {
+        console.log(`⚠️ Could not capture final failure screenshot: ${error}`);
+      }
+    }
+  });
+
   test('TC01: Verify contact form is displayed', async ({ page }) => {
     await test.step('Check if contact form is visible', async () => {
       // Verify contact form is visible by checking for specific contact form fields
@@ -444,40 +464,64 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
     });
 
     await test.step('Verify successful redirection to Accounts Overview page', async () => {
-      // Verify URL redirection
-      const currentUrl = page.url();
-      expect(currentUrl).toContain('overview.htm');
-      console.log(`✓ Redirected to correct URL: ${currentUrl}`);
+      try {
+        // Verify URL redirection
+        const currentUrl = page.url();
+        await page.screenshot({ path: 'screenshots/tc013-current-page-state.png' });
+        console.log(`📸 Current page state captured: tc013-current-page-state.png`);
+        
+        expect(currentUrl).toContain('overview.htm');
+        console.log(`✓ Redirected to correct URL: ${currentUrl}`);
 
-      // Verify page title
-      const pageTitle = await page.title();
-      expect(pageTitle).toContain('ParaBank');
-      console.log(`✓ Page title: ${pageTitle}`);
+        // Verify page title
+        const pageTitle = await page.title();
+        expect(pageTitle).toContain('ParaBank');
+        console.log(`✓ Page title: ${pageTitle}`);
 
-      // Verify specific welcome message for John Smith
-      const welcomeMessage = page.locator('p:has-text("Welcome John Smith")');
-      await expect(welcomeMessage).toBeVisible();
-      console.log('✓ Welcome message for John Smith is visible');
+        // Verify specific welcome message for John Smith
+        const welcomeMessage = page.locator('p:has-text("Welcome John Smith")');
+        await expect(welcomeMessage).toBeVisible();
+        console.log('✓ Welcome message for John Smith is visible');
 
-      // Verify left sidebar menu
-      const leftMenu = page.locator('#leftPanel, .leftPanel');
-      await expect(leftMenu).toBeVisible();
-      console.log('✓ Left sidebar menu is visible');
+        // Verify left sidebar menu
+        const leftMenu = page.locator('#leftPanel, .leftPanel');
+        await expect(leftMenu).toBeVisible();
+        console.log('✓ Left sidebar menu is visible');
 
-      // Verify main content area with specific Accounts Overview heading
-      const accountsHeading = page.locator('h1:has-text("Accounts Overview")').first();
-      await expect(accountsHeading).toBeVisible();
-      console.log('✓ Accounts Overview heading is visible');
+        // Verify main content area with specific Accounts Overview heading
+        const accountsHeading = page.locator('h1:has-text("Accounts Overview")').first();
+        await expect(accountsHeading).toBeVisible();
+        console.log('✓ Accounts Overview heading is visible');
 
-      // Verify accounts table is present
-      const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' });
-      await expect(accountsTable).toBeVisible();
-      console.log('✓ Accounts table is visible');
+        // Verify accounts table is present
+        const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' });
+        await expect(accountsTable).toBeVisible();
+        console.log('✓ Accounts table is visible');
 
-      // Additional verification: Check that we're NOT seeing any error messages
-      const errorHeading = page.locator('h1:has-text("Error!")');
-      await expect(errorHeading).not.toBeVisible();
-      console.log('✓ No error messages present');
+        // Additional verification: Check that we're NOT seeing any error messages
+        const errorHeading = page.locator('h1:has-text("Error!")');
+        await expect(errorHeading).not.toBeVisible();
+        console.log('✓ No error messages present');
+        
+        // Take success screenshot
+        await page.screenshot({ path: 'screenshots/tc013-login-verification-success.png' });
+        console.log('📸 Login verification success: tc013-login-verification-success.png');
+        
+      } catch (error) {
+        // Take failure screenshot with detailed page state
+        await page.screenshot({ path: 'screenshots/tc013-login-verification-failed.png' });
+        console.log('📸 Login verification failed: tc013-login-verification-failed.png');
+        
+        // Get page content for debugging
+        const pageContent = await page.textContent('body');
+        console.log(`❌ Page content preview: ${pageContent?.substring(0, 200)}...`);
+        
+        // Log current URL for debugging
+        const currentUrl = page.url();
+        console.log(`❌ Current URL when verification failed: ${currentUrl}`);
+        
+        throw error; // Re-throw to maintain test failure
+      }
     });
   });
 
@@ -494,31 +538,57 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
     });
 
     await test.step('Validate table structure and headers', async () => {
-      // Locate the accounts table specifically by content
-      const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
-      await expect(accountsTable).toBeVisible();
+      try {
+        // Take screenshot before validation
+        await page.screenshot({ path: 'screenshots/tc014-before-table-validation.png' });
+        console.log('📸 Before table validation: tc014-before-table-validation.png');
+        
+        // Locate the accounts table specifically by content
+        const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
+        await expect(accountsTable).toBeVisible();
 
-      // Count number of columns by checking header cells in the correct table
-      const headerCells = accountsTable.locator('tr').first().locator('td, th');
-      const columnCount = await headerCells.count();
-      console.log(`✓ Table has ${columnCount} columns`);
+        // Count number of columns by checking header cells in the correct table
+        const headerCells = accountsTable.locator('tr').first().locator('td, th');
+        const columnCount = await headerCells.count();
+        console.log(`✓ Table has ${columnCount} columns`);
 
-      // Verify expected column headers
-      const expectedHeaders = ['Account', 'Balance', 'Available Amount'];
-      for (let i = 0; i < Math.min(columnCount, expectedHeaders.length); i++) {
-        const headerText = await headerCells.nth(i).textContent();
-        console.log(`✓ Column ${i + 1} header: "${headerText?.trim()}"`);
+        // Verify expected column headers
+        const expectedHeaders = ['Account', 'Balance', 'Available Amount'];
+        for (let i = 0; i < Math.min(columnCount, expectedHeaders.length); i++) {
+          const headerText = await headerCells.nth(i).textContent();
+          console.log(`✓ Column ${i + 1} header: "${headerText?.trim()}"`);
+        }
+
+        // Check for table styling and structure
+        const tableRows = accountsTable.locator('tbody tr, tr').filter({ hasText: '$' });
+        const rowCount = await tableRows.count();
+        console.log(`✓ Table has ${rowCount} data rows`);
+
+        // Verify table has proper structure
+        expect(columnCount).toBeGreaterThanOrEqual(2);
+        expect(rowCount).toBeGreaterThan(0);
+        console.log('✓ Table structure validation completed');
+        
+        // Take success screenshot
+        await page.screenshot({ path: 'screenshots/tc014-table-validation-success.png' });
+        console.log('📸 Table validation success: tc014-table-validation-success.png');
+        
+      } catch (error) {
+        // Take failure screenshot
+        await page.screenshot({ path: 'screenshots/tc014-table-validation-failed.png' });
+        console.log('📸 Table validation failed: tc014-table-validation-failed.png');
+        
+        // Check what tables are actually present
+        const allTables = page.locator('table');
+        const tableCount = await allTables.count();
+        console.log(`❌ Found ${tableCount} total tables on page`);
+        
+        // Log page content for debugging
+        const pageContent = await page.textContent('body');
+        console.log(`❌ Page content preview: ${pageContent?.substring(0, 300)}...`);
+        
+        throw error; // Re-throw to maintain test failure
       }
-
-      // Check for table styling and structure
-      const tableRows = accountsTable.locator('tbody tr, tr').filter({ hasText: '$' });
-      const rowCount = await tableRows.count();
-      console.log(`✓ Table has ${rowCount} data rows`);
-
-      // Verify table has proper structure
-      expect(columnCount).toBeGreaterThanOrEqual(2);
-      expect(rowCount).toBeGreaterThan(0);
-      console.log('✓ Table structure validation completed');
     });
   });
 
@@ -649,12 +719,101 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
     });
 
     await test.step('Navigate to Transfer Funds page', async () => {
-      // Click on Transfer Funds link in sidebar
-      const transferFundsLink = page.locator('a[href="transfer.htm"]');
-      await expect(transferFundsLink).toBeVisible();
-      await transferFundsLink.click();
-      await page.waitForLoadState('networkidle');
-      console.log('✓ Clicked on Transfer Funds link');
+      try {
+        // Take screenshot before attempting to find transfer link
+        await page.screenshot({ path: 'screenshots/tc017-before-transfer-link-search.png' });
+        console.log('📸 Before transfer link search: tc017-before-transfer-link-search.png');
+        
+        // Ensure sidebar / navigation is loaded (if present) before searching for the link
+        try {
+          await page.waitForSelector('#leftPanel, .leftPanel', { state: 'visible', timeout: 10000 });
+        } catch {
+          // Sidebar may not exist on all pages, continue to search for link globally
+        }
+
+        // Try multiple robust selector strategies and allow extra timeout for slow loads
+        const transferSelectors = [
+          'a[href="transfer.htm"]',
+          'a:has-text("Transfer Funds")',
+          'a:has-text("Transfer")',
+          'text=Transfer Funds',
+          '[role="link"]:has-text("Transfer Funds")'
+        ];
+
+        let clicked = false;
+        for (const sel of transferSelectors) {
+          try {
+            const locator = page.locator(sel).first();
+            if (await locator.count() === 0) continue;
+            await expect(locator).toBeVisible({ timeout: 15000 });
+            await locator.click();
+            clicked = true;
+            console.log(`✓ Clicked transfer link using selector: ${sel}`);
+            break;
+          } catch (innerError) {
+            // Try next selector
+          }
+        }
+
+        if (!clicked) {
+          // Final attempt: wait for any link that contains "transfer" in href or text
+          const fallback = page.locator('a').filter({ hasText: /transfer/i });
+          if (await fallback.count() > 0) {
+            const el = fallback.first();
+            await expect(el).toBeVisible({ timeout: 10000 });
+            await el.click();
+            clicked = true;
+            console.log('✓ Clicked transfer link using fallback text-matching locator');
+          }
+        }
+
+        if (!clicked) {
+          // Take failure screenshot
+          await page.screenshot({ path: 'screenshots/tc017-transfer-link-not-found.png' });
+          console.log('📸 Transfer link not found: tc017-transfer-link-not-found.png');
+
+          // Check what links are available
+          const allLinks = page.locator('a');
+          const linkCount = await allLinks.count();
+          console.log(`❌ Found ${linkCount} total links on page`);
+
+          // Log available navigation links
+          for (let i = 0; i < Math.min(linkCount, 10); i++) {
+            const linkText = await allLinks.nth(i).textContent();
+            const linkHref = await allLinks.nth(i).getAttribute('href');
+            console.log(`❌ Link ${i + 1}: "${linkText?.trim()}" -> ${linkHref}`);
+          }
+
+          throw new Error('Transfer link not found with any selector strategy');
+        }
+
+        // Wait for navigation to complete after clicking
+        await page.waitForLoadState('networkidle');
+        console.log('✓ Clicked on Transfer Funds link');
+
+        // Take success screenshot
+        await page.screenshot({ path: 'screenshots/tc017-transfer-navigation-success.png' });
+        console.log('📸 Transfer navigation success: tc017-transfer-navigation-success.png');
+        
+      } catch (error) {
+        // Take failure screenshot
+        await page.screenshot({ path: 'screenshots/tc017-transfer-link-not-found.png' });
+        console.log('📸 Transfer link not found: tc017-transfer-link-not-found.png');
+        
+        // Check what links are available
+        const allLinks = page.locator('a');
+        const linkCount = await allLinks.count();
+        console.log(`❌ Found ${linkCount} total links on page`);
+        
+        // Log available navigation links
+        for (let i = 0; i < Math.min(linkCount, 10); i++) {
+          const linkText = await allLinks.nth(i).textContent();
+          const linkHref = await allLinks.nth(i).getAttribute('href');
+          console.log(`❌ Link ${i + 1}: "${linkText?.trim()}" -> ${linkHref}`);
+        }
+        
+        throw error; // Re-throw to maintain test failure
+      }
     });
 
     await test.step('Verify Fund Transfer page loads correctly', async () => {
@@ -686,140 +845,249 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
 
   test('TC_AUTO_018: Verify successful transfer between valid accounts', async ({ page }) => {
     await test.step('Login and navigate to Transfer Funds', async () => {
-      await page.goto(BASE_URL);
-      await page.waitForLoadState('networkidle');
-      
-      await page.fill('input[name="username"]', 'jsmith');
-      await page.fill('input[name="password"]', 'demo123');
-      await page.click('input[value="Log In"]');
-      await page.waitForLoadState('networkidle');
-      
-      // Navigate to Transfer Funds
-      await page.click('a[href="transfer.htm"]');
-      await page.waitForLoadState('networkidle');
-      console.log('✓ Navigated to Transfer Funds page');
+      try {
+        await page.goto(BASE_URL);
+        await page.waitForLoadState('networkidle');
+        
+        await page.fill('input[name="username"]', 'jsmith');
+        await page.fill('input[name="password"]', 'demo123');
+        await page.click('input[value="Log In"]');
+        await page.waitForLoadState('networkidle');
+        
+        // Take screenshot before attempting transfer navigation
+        await page.screenshot({ path: 'screenshots/tc018-before-transfer-navigation.png' });
+        console.log('📸 Before transfer navigation: tc018-before-transfer-navigation.png');
+        
+        // Navigate to Transfer Funds
+        await page.click('a[href="transfer.htm"]');
+        await page.waitForLoadState('networkidle');
+        console.log('✓ Navigated to Transfer Funds page');
+        
+        // Take success screenshot
+        await page.screenshot({ path: 'screenshots/tc018-transfer-page-loaded.png' });
+        console.log('📸 Transfer page loaded: tc018-transfer-page-loaded.png');
+        
+      } catch (error) {
+        // Take failure screenshot
+        await page.screenshot({ path: 'screenshots/tc018-transfer-navigation-failed.png' });
+        console.log('📸 Transfer navigation failed: tc018-transfer-navigation-failed.png');
+        
+        // Log current URL and page state
+        const currentUrl = page.url();
+        console.log(`❌ Current URL: ${currentUrl}`);
+        
+        throw error; // Re-throw to maintain test failure
+      }
     });
 
     await test.step('Get initial account balances', async () => {
-      // Go back to accounts overview to check initial balances
-      await page.click('a[href="overview.htm"]');
-      await page.waitForLoadState('networkidle');
-      
-      const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
-      
-      // Find accounts 12456 and 12678 (or use the first two available accounts)
-      const accountRows = accountsTable.locator('tbody tr, tr').filter({ hasText: '$' }).filter({ hasNotText: 'Total' });
-      const rowCount = await accountRows.count();
-      
-      if (rowCount >= 2) {
-        const firstAccountRow = accountRows.nth(0);
-        const secondAccountRow = accountRows.nth(1);
+      try {
+        // Go back to accounts overview to check initial balances
+        await page.click('a[href="overview.htm"]');
+        await page.waitForLoadState('networkidle');
         
-        const firstAccountNum = await firstAccountRow.locator('td').nth(0).textContent();
-        const firstAccountBalance = await firstAccountRow.locator('td').nth(1).textContent();
-        const secondAccountNum = await secondAccountRow.locator('td').nth(0).textContent();
-        const secondAccountBalance = await secondAccountRow.locator('td').nth(1).textContent();
+        // Take screenshot of accounts overview
+        await page.screenshot({ path: 'screenshots/tc018-accounts-overview.png' });
+        console.log('📸 Accounts overview captured: tc018-accounts-overview.png');
         
-        console.log(`✓ Source account ${firstAccountNum}: ${firstAccountBalance}`);
-        console.log(`✓ Destination account ${secondAccountNum}: ${secondAccountBalance}`);
+        const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
+        
+        // Find accounts 12456 and 12678 (or use the first two available accounts)
+        const accountRows = accountsTable.locator('tbody tr, tr').filter({ hasText: '$' }).filter({ hasNotText: 'Total' });
+        const rowCount = await accountRows.count();
+        
+        if (rowCount >= 2) {
+          const firstAccountRow = accountRows.nth(0);
+          const secondAccountRow = accountRows.nth(1);
+          
+          const firstAccountNum = await firstAccountRow.locator('td').nth(0).textContent();
+          const firstAccountBalance = await firstAccountRow.locator('td').nth(1).textContent();
+          const secondAccountNum = await secondAccountRow.locator('td').nth(0).textContent();
+          const secondAccountBalance = await secondAccountRow.locator('td').nth(1).textContent();
+          
+          console.log(`✓ Source account ${firstAccountNum}: ${firstAccountBalance}`);
+          console.log(`✓ Destination account ${secondAccountNum}: ${secondAccountBalance}`);
+        } else {
+          await page.screenshot({ path: 'screenshots/tc018-no-accounts-found.png' });
+          console.log('📸 No accounts found: tc018-no-accounts-found.png');
+          console.log(`⚠️ Found only ${rowCount} accounts, need at least 2 for transfer`);
+        }
+        
+        // Return to transfer page
+        await page.click('a[href="transfer.htm"]');
+        await page.waitForLoadState('networkidle');
+        
+        // Take screenshot of transfer page ready for input
+        await page.screenshot({ path: 'screenshots/tc018-transfer-form-ready.png' });
+        console.log('📸 Transfer form ready: tc018-transfer-form-ready.png');
+        
+      } catch (error) {
+        await page.screenshot({ path: 'screenshots/tc018-balance-check-failed.png' });
+        console.log('📸 Balance check failed: tc018-balance-check-failed.png');
+        throw error;
       }
-      
-      // Return to transfer page
-      await page.click('a[href="transfer.htm"]');
-      await page.waitForLoadState('networkidle');
     });
 
     await test.step('Perform transfer between accounts', async () => {
-      // Fill transfer amount
-      await page.fill('input[name="amount"]', '10.00');
-      console.log('✓ Entered transfer amount: $10.00');
+      try {
+        // Fill transfer amount
+        await page.fill('input[name="amount"]', '10.00');
+        console.log('✓ Entered transfer amount: $10.00');
 
-      // Select from and to accounts (use first available options)
-      const fromAccountSelect = page.locator('select[name="fromAccountId"]');
-      const toAccountSelect = page.locator('select[name="toAccountId"]');
-      
-      // Get available options
-      const fromOptions = await fromAccountSelect.locator('option').count();
-      const toOptions = await toAccountSelect.locator('option').count();
-      
-      if (fromOptions > 1 && toOptions > 1) {
-        // Select first available account as source (index 1 to skip placeholder)
-        await fromAccountSelect.selectOption({ index: 1 });
-        // Select second available account as destination (index 2 if available, else 1)
-        const toIndex = toOptions > 2 ? 2 : 1;
-        await toAccountSelect.selectOption({ index: toIndex });
+        // Take screenshot after entering amount
+        await page.screenshot({ path: 'screenshots/tc018-amount-entered.png' });
+        console.log('📸 Amount entered: tc018-amount-entered.png');
+
+        // Select from and to accounts (use first available options)
+        const fromAccountSelect = page.locator('select[name="fromAccountId"]');
+        const toAccountSelect = page.locator('select[name="toAccountId"]');
         
-        console.log('✓ Selected source and destination accounts');
-      }
+        // Get available options
+        const fromOptions = await fromAccountSelect.locator('option').count();
+        const toOptions = await toAccountSelect.locator('option').count();
+        
+        console.log(`✓ Found ${fromOptions} source account options and ${toOptions} destination account options`);
+        
+        if (fromOptions > 1 && toOptions > 1) {
+          // Select first available account as source (index 1 to skip placeholder)
+          await fromAccountSelect.selectOption({ index: 1 });
+          // Select second available account as destination (index 2 if available, else 1)
+          const toIndex = toOptions > 2 ? 2 : 1;
+          await toAccountSelect.selectOption({ index: toIndex });
+          
+          console.log('✓ Selected source and destination accounts');
+          
+          // Take screenshot with accounts selected
+          await page.screenshot({ path: 'screenshots/tc018-accounts-selected.png' });
+          console.log('📸 Accounts selected: tc018-accounts-selected.png');
+        } else {
+          await page.screenshot({ path: 'screenshots/tc018-insufficient-account-options.png' });
+          console.log('📸 Insufficient account options: tc018-insufficient-account-options.png');
+          console.log(`⚠️ Not enough account options - from: ${fromOptions}, to: ${toOptions}`);
+        }
 
-      // Click Transfer button
-      await page.click('input[value="Transfer"]');
-      await page.waitForLoadState('networkidle');
-      console.log('✓ Transfer submitted');
+        // Take screenshot before clicking transfer
+        await page.screenshot({ path: 'screenshots/tc018-before-transfer-submit.png' });
+        console.log('📸 Before transfer submit: tc018-before-transfer-submit.png');
+
+        // Click Transfer button
+        await page.click('input[value="Transfer"]');
+        await page.waitForLoadState('networkidle');
+        console.log('✓ Transfer submitted');
+        
+        // Take screenshot immediately after transfer submission
+        await page.screenshot({ path: 'screenshots/tc018-after-transfer-submit.png' });
+        console.log('📸 After transfer submit: tc018-after-transfer-submit.png');
+        
+      } catch (error) {
+        await page.screenshot({ path: 'screenshots/tc018-transfer-execution-failed.png' });
+        console.log('📸 Transfer execution failed: tc018-transfer-execution-failed.png');
+        throw error;
+      }
     });
 
     await test.step('Verify transfer completion', async () => {
-      // Check for success message or confirmation
-      const successMessage = page.locator('h1:has-text("Transfer Complete"), p:has-text("Transfer Complete"), .title:has-text("Transfer Complete")');
-      const errorMessage = page.locator('.error, [class*="error"]');
-      
-      // Wait a bit for the page to load
-      await page.waitForTimeout(2000);
-      
-      const currentUrl = page.url();
-      console.log(`✓ Transfer completed. Current URL: ${currentUrl}`);
-      
-      // Capture screenshot of transfer result page
-      await page.screenshot({ path: 'screenshots/tc018-transfer-result.png' });
-      console.log('📸 Screenshot captured: tc018-transfer-result.png');
-      
-      // Check if we're on a confirmation page or if there are any error messages
-      const pageContent = await page.textContent('body');
-      
-      if (pageContent?.includes('Transfer Complete')) {
-        console.log('✓ Transfer appears to have been processed');
-        await page.screenshot({ path: 'screenshots/tc018-transfer-success.png' });
-        console.log('📸 Success screenshot: tc018-transfer-success.png');
+      try {
+        // Check for success message or confirmation
+        const successMessage = page.locator('h1:has-text("Transfer Complete"), p:has-text("Transfer Complete"), .title:has-text("Transfer Complete")');
+        const errorMessage = page.locator('.error, [class*="error"]');
         
-        // ⚠️ CRITICAL: This test does NOT verify actual balance changes
-        console.log('🐛 WARNING: This test only verifies form submission, NOT actual money transfer');
-        console.log('⚠️ Missing validation: Balance changes are not verified');
-        console.log('🔍 Test gap: Cannot confirm if $10.00 was actually transferred between accounts');
+        // Wait a bit for the page to load
+        await page.waitForTimeout(2000);
         
-        // Capture evidence of incomplete validation
-        await page.screenshot({ path: 'screenshots/tc018-incomplete-validation-evidence.png' });
-        console.log('📸 Evidence of incomplete validation: tc018-incomplete-validation-evidence.png');
+        const currentUrl = page.url();
+        console.log(`✓ Transfer completed. Current URL: ${currentUrl}`);
         
-      } else if (await errorMessage.count() > 0) {
-        const errorText = await errorMessage.first().textContent();
-        console.log(`⚠️ Transfer validation: ${errorText}`);
-        await page.screenshot({ path: 'screenshots/tc018-transfer-error.png' });
-        console.log('📸 Error screenshot: tc018-transfer-error.png');
-      } else {
-        console.log('✓ Transfer form submitted - checking for validation or confirmation');
-        await page.screenshot({ path: 'screenshots/tc018-transfer-unknown-state.png' });
-        console.log('📸 Unknown state screenshot: tc018-transfer-unknown-state.png');
+        // Capture screenshot of transfer result page
+        await page.screenshot({ path: 'screenshots/tc018-transfer-result.png' });
+        console.log('📸 Screenshot captured: tc018-transfer-result.png');
+        
+        // Check if we're on a confirmation page or if there are any error messages
+        const pageContent = await page.textContent('body');
+        
+        if (pageContent?.includes('Transfer Complete')) {
+          console.log('✓ Transfer appears to have been processed');
+          await page.screenshot({ path: 'screenshots/tc018-transfer-success.png' });
+          console.log('📸 Success screenshot: tc018-transfer-success.png');
+          
+          // ⚠️ CRITICAL: This test does NOT verify actual balance changes
+          console.log('🐛 WARNING: This test only verifies form submission, NOT actual money transfer');
+          console.log('⚠️ Missing validation: Balance changes are not verified');
+          console.log('🔍 Test gap: Cannot confirm if $10.00 was actually transferred between accounts');
+          
+          // Capture evidence of incomplete validation
+          await page.screenshot({ path: 'screenshots/tc018-incomplete-validation-evidence.png' });
+          console.log('📸 Evidence of incomplete validation: tc018-incomplete-validation-evidence.png');
+          
+        } else if (await errorMessage.count() > 0) {
+          const errorText = await errorMessage.first().textContent();
+          console.log(`⚠️ Transfer validation: ${errorText}`);
+          await page.screenshot({ path: 'screenshots/tc018-transfer-error.png' });
+          console.log('📸 Error screenshot: tc018-transfer-error.png');
+        } else {
+          console.log('✓ Transfer form submitted - checking for validation or confirmation');
+          await page.screenshot({ path: 'screenshots/tc018-transfer-unknown-state.png' });
+          console.log('📸 Unknown state screenshot: tc018-transfer-unknown-state.png');
+          
+          // Log page content for debugging
+          console.log(`🔍 Page content preview: ${pageContent?.substring(0, 300)}...`);
+        }
+        
+        // Log final status with warning about test completeness
+        console.log('✓ Transfer validation completed');
+        console.log('❌ NOTE: This test does NOT validate actual financial transaction occurred');
+        
+        // Take final state screenshot
+        await page.screenshot({ path: 'screenshots/tc018-final-state.png' });
+        console.log('📸 Final state: tc018-final-state.png');
+        
+      } catch (error) {
+        await page.screenshot({ path: 'screenshots/tc018-verification-failed.png' });
+        console.log('📸 Verification failed: tc018-verification-failed.png');
+        
+        // Log additional debug info
+        const currentUrl = page.url();
+        console.log(`❌ Verification failed at URL: ${currentUrl}`);
+        
+        throw error;
       }
-      
-      // Log final status with warning about test completeness
-      console.log('✓ Transfer validation completed');
-      console.log('❌ NOTE: This test does NOT validate actual financial transaction occurred');
     });
   });
 
   test('TC_AUTO_019: Validate error when transferring negative or zero amount', async ({ page }) => {
     await test.step('Login and navigate to Transfer Funds', async () => {
-      await page.goto(BASE_URL);
-      await page.waitForLoadState('networkidle');
-      
-      await page.fill('input[name="username"]', 'jsmith');
-      await page.fill('input[name="password"]', 'demo123');
-      await page.click('input[value="Log In"]');
-      await page.waitForLoadState('networkidle');
-      
-      await page.click('a[href="transfer.htm"]');
-      await page.waitForLoadState('networkidle');
-      console.log('✓ Navigated to Transfer Funds page');
+      try {
+        await page.goto(BASE_URL);
+        await page.waitForLoadState('networkidle');
+        
+        await page.fill('input[name="username"]', 'jsmith');
+        await page.fill('input[name="password"]', 'demo123');
+        await page.click('input[value="Log In"]');
+        await page.waitForLoadState('networkidle');
+        
+        // Take screenshot before attempting transfer navigation
+        await page.screenshot({ path: 'screenshots/tc019-before-transfer-navigation.png' });
+        console.log('📸 Before transfer navigation: tc019-before-transfer-navigation.png');
+        
+        await page.click('a[href="transfer.htm"]');
+        await page.waitForLoadState('networkidle');
+        console.log('✓ Navigated to Transfer Funds page');
+        
+        // Take success screenshot
+        await page.screenshot({ path: 'screenshots/tc019-transfer-page-loaded.png' });
+        console.log('📸 Transfer page loaded: tc019-transfer-page-loaded.png');
+        
+      } catch (error) {
+        // Take failure screenshot
+        await page.screenshot({ path: 'screenshots/tc019-transfer-navigation-failed.png' });
+        console.log('📸 Transfer navigation failed: tc019-transfer-navigation-failed.png');
+        
+        // Log current URL for debugging
+        const currentUrl = page.url();
+        console.log(`❌ Current URL: ${currentUrl}`);
+        
+        throw error; // Re-throw to maintain test failure
+      }
     });
 
     await test.step('Test transfer with negative amount', async () => {
@@ -884,17 +1152,38 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
 
   test('TC_AUTO_020: Validate error when no accounts are selected for transfer', async ({ page }) => {
     await test.step('Login and navigate to Transfer Funds', async () => {
-      await page.goto(BASE_URL);
-      await page.waitForLoadState('networkidle');
-      
-      await page.fill('input[name="username"]', 'jsmith');
-      await page.fill('input[name="password"]', 'demo123');
-      await page.click('input[value="Log In"]');
-      await page.waitForLoadState('networkidle');
-      
-      await page.click('a[href="transfer.htm"]');
-      await page.waitForLoadState('networkidle');
-      console.log('✓ Navigated to Transfer Funds page');
+      try {
+        await page.goto(BASE_URL);
+        await page.waitForLoadState('networkidle');
+        
+        await page.fill('input[name="username"]', 'jsmith');
+        await page.fill('input[name="password"]', 'demo123');
+        await page.click('input[value="Log In"]');
+        await page.waitForLoadState('networkidle');
+        
+        // Take screenshot before attempting transfer navigation
+        await page.screenshot({ path: 'screenshots/tc020-before-transfer-navigation.png' });
+        console.log('📸 Before transfer navigation: tc020-before-transfer-navigation.png');
+        
+        await page.click('a[href="transfer.htm"]');
+        await page.waitForLoadState('networkidle');
+        console.log('✓ Navigated to Transfer Funds page');
+        
+        // Take success screenshot
+        await page.screenshot({ path: 'screenshots/tc020-transfer-page-loaded.png' });
+        console.log('📸 Transfer page loaded: tc020-transfer-page-loaded.png');
+        
+      } catch (error) {
+        // Take failure screenshot
+        await page.screenshot({ path: 'screenshots/tc020-transfer-navigation-failed.png' });
+        console.log('📸 Transfer navigation failed: tc020-transfer-navigation-failed.png');
+        
+        // Log current URL for debugging
+        const currentUrl = page.url();
+        console.log(`❌ Current URL: ${currentUrl}`);
+        
+        throw error; // Re-throw to maintain test failure
+      }
     });
 
     await test.step('Test transfer without selecting accounts', async () => {
