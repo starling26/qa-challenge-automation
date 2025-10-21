@@ -23,14 +23,14 @@ test.describe('Contact Form Validation Tests', () => {
       
       try {
         await page.screenshot({ path: screenshotPath });
-        console.log(`📸 Final failure state captured: ${screenshotPath}`);
+        console.log(` Final failure state captured: ${screenshotPath}`);
         
         // Log additional debug info
         const currentUrl = page.url();
         const pageTitle = await page.title();
-        console.log(`❌ Test failed - URL: ${currentUrl}, Title: ${pageTitle}`);
+        console.log(`Test failed - URL: ${currentUrl}, Title: ${pageTitle}`);
       } catch (error) {
-        console.log(`⚠️ Could not capture final failure screenshot: ${error}`);
+        console.log(` Could not capture final failure screenshot: ${error}`);
       }
     }
   });
@@ -119,7 +119,7 @@ test.describe('Contact Form Validation Tests', () => {
       
       // Capture form with invalid email before submission
       await page.screenshot({ path: 'screenshots/tc03-invalid-email-form-filled.png' });
-      console.log('📸 Screenshot captured: tc03-invalid-email-form-filled.png');
+      console.log(' Screenshot captured: tc03-invalid-email-form-filled.png');
     });
 
     await test.step('Submit form and verify validation behavior', async () => {
@@ -145,10 +145,10 @@ test.describe('Contact Form Validation Tests', () => {
       if (isSuccessVisible) {
         // BUG DETECTED: Invalid email was accepted
         await page.screenshot({ path: 'screenshots/tc03-email-bug-evidence.png' });
-        console.log('📸 Bug evidence captured: tc03-email-bug-evidence.png');
-        console.log('🐛 CONFIRMED BUG: Invalid email format was accepted');
-        console.log('⚠️ Expected: Email validation should reject "sdeg@gmail" (no TLD)');
-        console.log('🔍 Actual: Form submission succeeded with invalid email');
+        console.log(' Bug evidence captured: tc03-email-bug-evidence.png');
+        console.log(' CONFIRMED BUG: Invalid email format was accepted');
+        console.log(' Expected: Email validation should reject "sdeg@gmail" (no TLD)');
+        console.log(' Actual: Form submission succeeded with invalid email');
       }
       
       // Check for server-side validation error (ParaBank might show custom error)
@@ -162,10 +162,10 @@ test.describe('Contact Form Validation Tests', () => {
       // Enhanced validation - check if proper error handling exists
       if (await emailFormatError.count() > 0) {
         await page.screenshot({ path: 'screenshots/tc03-proper-email-validation.png' });
-        console.log('✅ Proper email validation found');
+        console.log('Proper email validation found');
       } else {
         await page.screenshot({ path: 'screenshots/tc03-missing-email-validation.png' });
-        console.log('⚠️ No specific email format validation found');
+        console.log(' No specific email format validation found');
       }
       
       // Verify we're still on contact page or check for validation messages
@@ -273,7 +273,7 @@ test.describe('Contact Form Validation Tests', () => {
       
       // Take screenshot before assertion to capture the bug
       await page.screenshot({ path: 'screenshots/tc08-phone-bug-evidence.png' });
-      console.log('📸 Screenshot captured: tc08-phone-bug-evidence.png');
+      console.log('Screenshot captured: tc08-phone-bug-evidence.png');
       
       try {
         // The field should either reject the input or the input should be empty/filtered
@@ -283,10 +283,10 @@ test.describe('Contact Form Validation Tests', () => {
       } catch (error) {
         // Capture additional screenshot when assertions fail
         await page.screenshot({ path: 'screenshots/tc08-phone-validation-failure.png' });
-        console.log('📸 Assertion failure screenshot: tc08-phone-validation-failure.png');
-        console.log('🐛 CONFIRMED BUG: Phone field accepts alphabetic characters');
-        console.log('⚠️ Expected: Field should reject non-numeric input');
-        console.log('🔍 Actual: Field accepts any text input');
+        console.log(' Assertion failure screenshot: tc08-phone-validation-failure.png');
+        console.log(' CONFIRMED BUG: Phone field accepts alphabetic characters');
+        console.log(' Expected: Field should reject non-numeric input');
+        console.log(' Actual: Field accepts any text input');
         throw error; // Re-throw to maintain test failure
       }
       
@@ -436,7 +436,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
       
       // Capture form before login attempt
       await page.screenshot({ path: 'screenshots/tc013-login-form-filled.png' });
-      console.log('📸 Screenshot captured: tc013-login-form-filled.png');
+      console.log('Screenshot captured: tc013-login-form-filled.png');
       
       // Click login button
       await page.click('input[value="Log In"]');
@@ -447,19 +447,19 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
       const currentUrl = page.url();
       if (currentUrl.includes('login.htm') || currentUrl.includes('error')) {
         await page.screenshot({ path: 'screenshots/tc013-login-failed-evidence.png' });
-        console.log('📸 Login failure evidence: tc013-login-failed-evidence.png');
-        console.log('🐛 LOGIN FAILED: Credentials jsmith/demo123 are invalid');
-        console.log('⚠️ This will cause all account-related tests to fail');
-        console.log('🔍 Need to update test credentials or create test user');
+        console.log('Login failure evidence: tc013-login-failed-evidence.png');
+        console.log('LOGIN FAILED: Credentials jsmith/demo123 are invalid');
+        console.log('This will cause all account-related tests to fail');
+        console.log('Need to update test credentials or create test user');
         
         // Check for specific error message
         const errorMessage = page.locator('h1:has-text("Error!"), p:has-text("username and password could not be verified")');
         if (await errorMessage.count() > 0) {
-          console.log('✅ Error message confirmed: Invalid credentials');
+          console.log('Error message confirmed: Invalid credentials');
         }
       } else {
         await page.screenshot({ path: 'screenshots/tc013-login-success.png' });
-        console.log('📸 Login success: tc013-login-success.png');
+        console.log(' Login success: tc013-login-success.png');
       }
     });
 
@@ -468,7 +468,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         // Verify URL redirection
         const currentUrl = page.url();
         await page.screenshot({ path: 'screenshots/tc013-current-page-state.png' });
-        console.log(`📸 Current page state captured: tc013-current-page-state.png`);
+        console.log(`Current page state captured: tc013-current-page-state.png`);
         
         expect(currentUrl).toContain('overview.htm');
         console.log(`✓ Redirected to correct URL: ${currentUrl}`);
@@ -505,20 +505,20 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take success screenshot
         await page.screenshot({ path: 'screenshots/tc013-login-verification-success.png' });
-        console.log('📸 Login verification success: tc013-login-verification-success.png');
+        console.log('Login verification success: tc013-login-verification-success.png');
         
       } catch (error) {
         // Take failure screenshot with detailed page state
         await page.screenshot({ path: 'screenshots/tc013-login-verification-failed.png' });
-        console.log('📸 Login verification failed: tc013-login-verification-failed.png');
+        console.log('Login verification failed: tc013-login-verification-failed.png');
         
         // Get page content for debugging
         const pageContent = await page.textContent('body');
-        console.log(`❌ Page content preview: ${pageContent?.substring(0, 200)}...`);
+        console.log(`Page content preview: ${pageContent?.substring(0, 200)}...`);
         
         // Log current URL for debugging
         const currentUrl = page.url();
-        console.log(`❌ Current URL when verification failed: ${currentUrl}`);
+        console.log(`Current URL when verification failed: ${currentUrl}`);
         
         throw error; // Re-throw to maintain test failure
       }
@@ -541,7 +541,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
       try {
         // Take screenshot before validation
         await page.screenshot({ path: 'screenshots/tc014-before-table-validation.png' });
-        console.log('📸 Before table validation: tc014-before-table-validation.png');
+        console.log('Before table validation: tc014-before-table-validation.png');
         
         // Locate the accounts table specifically by content
         const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
@@ -571,21 +571,21 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take success screenshot
         await page.screenshot({ path: 'screenshots/tc014-table-validation-success.png' });
-        console.log('📸 Table validation success: tc014-table-validation-success.png');
+        console.log('Table validation success: tc014-table-validation-success.png');
         
       } catch (error) {
         // Take failure screenshot
         await page.screenshot({ path: 'screenshots/tc014-table-validation-failed.png' });
-        console.log('📸 Table validation failed: tc014-table-validation-failed.png');
+        console.log('Table validation failed: tc014-table-validation-failed.png');
         
         // Check what tables are actually present
         const allTables = page.locator('table');
         const tableCount = await allTables.count();
-        console.log(`❌ Found ${tableCount} total tables on page`);
+        console.log(`Found ${tableCount} total tables on page`);
         
         // Log page content for debugging
         const pageContent = await page.textContent('body');
-        console.log(`❌ Page content preview: ${pageContent?.substring(0, 300)}...`);
+        console.log(`Page content preview: ${pageContent?.substring(0, 300)}...`);
         
         throw error; // Re-throw to maintain test failure
       }
@@ -691,7 +691,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
             // For positive balances, available amount should not exceed balance
             if (balanceNum > 0 && availableNum > balanceNum) {
               violationCount++;
-              console.log(`❌ Violation found: Account ${accountNum} - Available (${availableNum}) > Balance (${balanceNum})`);
+              console.log(`Violation found: Account ${accountNum} - Available (${availableNum}) > Balance (${balanceNum})`);
             } else {
               console.log(`✓ Account ${accountNum} - Available Amount ≤ Balance rule satisfied`);
             }
@@ -722,7 +722,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
       try {
         // Take screenshot before attempting to find transfer link
         await page.screenshot({ path: 'screenshots/tc017-before-transfer-link-search.png' });
-        console.log('📸 Before transfer link search: tc017-before-transfer-link-search.png');
+        console.log('Before transfer link search: tc017-before-transfer-link-search.png');
         
         // Ensure sidebar / navigation is loaded (if present) before searching for the link
         try {
@@ -770,18 +770,18 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         if (!clicked) {
           // Take failure screenshot
           await page.screenshot({ path: 'screenshots/tc017-transfer-link-not-found.png' });
-          console.log('📸 Transfer link not found: tc017-transfer-link-not-found.png');
+          console.log('Transfer link not found: tc017-transfer-link-not-found.png');
 
           // Check what links are available
           const allLinks = page.locator('a');
           const linkCount = await allLinks.count();
-          console.log(`❌ Found ${linkCount} total links on page`);
+          console.log(`Found ${linkCount} total links on page`);
 
           // Log available navigation links
           for (let i = 0; i < Math.min(linkCount, 10); i++) {
             const linkText = await allLinks.nth(i).textContent();
             const linkHref = await allLinks.nth(i).getAttribute('href');
-            console.log(`❌ Link ${i + 1}: "${linkText?.trim()}" -> ${linkHref}`);
+            console.log(`Link ${i + 1}: "${linkText?.trim()}" -> ${linkHref}`);
           }
 
           throw new Error('Transfer link not found with any selector strategy');
@@ -793,23 +793,23 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
 
         // Take success screenshot
         await page.screenshot({ path: 'screenshots/tc017-transfer-navigation-success.png' });
-        console.log('📸 Transfer navigation success: tc017-transfer-navigation-success.png');
+        console.log('Transfer navigation success: tc017-transfer-navigation-success.png');
         
       } catch (error) {
         // Take failure screenshot
         await page.screenshot({ path: 'screenshots/tc017-transfer-link-not-found.png' });
-        console.log('📸 Transfer link not found: tc017-transfer-link-not-found.png');
+        console.log('Transfer link not found: tc017-transfer-link-not-found.png');
         
         // Check what links are available
         const allLinks = page.locator('a');
         const linkCount = await allLinks.count();
-        console.log(`❌ Found ${linkCount} total links on page`);
+        console.log(`Found ${linkCount} total links on page`);
         
         // Log available navigation links
         for (let i = 0; i < Math.min(linkCount, 10); i++) {
           const linkText = await allLinks.nth(i).textContent();
           const linkHref = await allLinks.nth(i).getAttribute('href');
-          console.log(`❌ Link ${i + 1}: "${linkText?.trim()}" -> ${linkHref}`);
+          console.log(`Link ${i + 1}: "${linkText?.trim()}" -> ${linkHref}`);
         }
         
         throw error; // Re-throw to maintain test failure
@@ -856,7 +856,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take screenshot before attempting transfer navigation
         await page.screenshot({ path: 'screenshots/tc018-before-transfer-navigation.png' });
-        console.log('📸 Before transfer navigation: tc018-before-transfer-navigation.png');
+        console.log('Before transfer navigation: tc018-before-transfer-navigation.png');
         
         // Navigate to Transfer Funds
         await page.click('a[href="transfer.htm"]');
@@ -865,16 +865,16 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take success screenshot
         await page.screenshot({ path: 'screenshots/tc018-transfer-page-loaded.png' });
-        console.log('📸 Transfer page loaded: tc018-transfer-page-loaded.png');
+        console.log('Transfer page loaded: tc018-transfer-page-loaded.png');
         
       } catch (error) {
         // Take failure screenshot
         await page.screenshot({ path: 'screenshots/tc018-transfer-navigation-failed.png' });
-        console.log('📸 Transfer navigation failed: tc018-transfer-navigation-failed.png');
+        console.log(' Transfer navigation failed: tc018-transfer-navigation-failed.png');
         
         // Log current URL and page state
         const currentUrl = page.url();
-        console.log(`❌ Current URL: ${currentUrl}`);
+        console.log(`Current URL: ${currentUrl}`);
         
         throw error; // Re-throw to maintain test failure
       }
@@ -888,7 +888,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take screenshot of accounts overview
         await page.screenshot({ path: 'screenshots/tc018-accounts-overview.png' });
-        console.log('📸 Accounts overview captured: tc018-accounts-overview.png');
+        console.log('Accounts overview captured: tc018-accounts-overview.png');
         
         const accountsTable = page.locator('table').filter({ hasText: 'Account' }).filter({ hasText: 'Balance' }).first();
         
@@ -909,8 +909,8 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
           console.log(`✓ Destination account ${secondAccountNum}: ${secondAccountBalance}`);
         } else {
           await page.screenshot({ path: 'screenshots/tc018-no-accounts-found.png' });
-          console.log('📸 No accounts found: tc018-no-accounts-found.png');
-          console.log(`⚠️ Found only ${rowCount} accounts, need at least 2 for transfer`);
+          console.log('No accounts found: tc018-no-accounts-found.png');
+          console.log(`Found only ${rowCount} accounts, need at least 2 for transfer`);
         }
         
         // Return to transfer page
@@ -919,11 +919,11 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take screenshot of transfer page ready for input
         await page.screenshot({ path: 'screenshots/tc018-transfer-form-ready.png' });
-        console.log('📸 Transfer form ready: tc018-transfer-form-ready.png');
+        console.log('Transfer form ready: tc018-transfer-form-ready.png');
         
       } catch (error) {
         await page.screenshot({ path: 'screenshots/tc018-balance-check-failed.png' });
-        console.log('📸 Balance check failed: tc018-balance-check-failed.png');
+        console.log(' Balance check failed: tc018-balance-check-failed.png');
         throw error;
       }
     });
@@ -936,7 +936,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
 
         // Take screenshot after entering amount
         await page.screenshot({ path: 'screenshots/tc018-amount-entered.png' });
-        console.log('📸 Amount entered: tc018-amount-entered.png');
+        console.log('Amount entered: tc018-amount-entered.png');
 
         // Select from and to accounts (use first available options)
         const fromAccountSelect = page.locator('select[name="fromAccountId"]');
@@ -959,16 +959,16 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
           
           // Take screenshot with accounts selected
           await page.screenshot({ path: 'screenshots/tc018-accounts-selected.png' });
-          console.log('📸 Accounts selected: tc018-accounts-selected.png');
+          console.log('Accounts selected: tc018-accounts-selected.png');
         } else {
           await page.screenshot({ path: 'screenshots/tc018-insufficient-account-options.png' });
-          console.log('📸 Insufficient account options: tc018-insufficient-account-options.png');
-          console.log(`⚠️ Not enough account options - from: ${fromOptions}, to: ${toOptions}`);
+          console.log('Insufficient account options: tc018-insufficient-account-options.png');
+          console.log(` Not enough account options - from: ${fromOptions}, to: ${toOptions}`);
         }
 
         // Take screenshot before clicking transfer
         await page.screenshot({ path: 'screenshots/tc018-before-transfer-submit.png' });
-        console.log('📸 Before transfer submit: tc018-before-transfer-submit.png');
+        console.log('Before transfer submit: tc018-before-transfer-submit.png');
 
         // Click Transfer button
         await page.click('input[value="Transfer"]');
@@ -977,11 +977,11 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take screenshot immediately after transfer submission
         await page.screenshot({ path: 'screenshots/tc018-after-transfer-submit.png' });
-        console.log('📸 After transfer submit: tc018-after-transfer-submit.png');
+        console.log('After transfer submit: tc018-after-transfer-submit.png');
         
       } catch (error) {
         await page.screenshot({ path: 'screenshots/tc018-transfer-execution-failed.png' });
-        console.log('📸 Transfer execution failed: tc018-transfer-execution-failed.png');
+        console.log('Transfer execution failed: tc018-transfer-execution-failed.png');
         throw error;
       }
     });
@@ -1000,7 +1000,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Capture screenshot of transfer result page
         await page.screenshot({ path: 'screenshots/tc018-transfer-result.png' });
-        console.log('📸 Screenshot captured: tc018-transfer-result.png');
+        console.log(' Screenshot captured: tc018-transfer-result.png');
         
         // Check if we're on a confirmation page or if there are any error messages
         const pageContent = await page.textContent('body');
@@ -1008,46 +1008,46 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         if (pageContent?.includes('Transfer Complete')) {
           console.log('✓ Transfer appears to have been processed');
           await page.screenshot({ path: 'screenshots/tc018-transfer-success.png' });
-          console.log('📸 Success screenshot: tc018-transfer-success.png');
+          console.log(' Success screenshot: tc018-transfer-success.png');
           
-          // ⚠️ CRITICAL: This test does NOT verify actual balance changes
-          console.log('🐛 WARNING: This test only verifies form submission, NOT actual money transfer');
-          console.log('⚠️ Missing validation: Balance changes are not verified');
-          console.log('🔍 Test gap: Cannot confirm if $10.00 was actually transferred between accounts');
+          // CRITICAL: This test does NOT verify actual balance changes
+          console.log('WARNING: This test only verifies form submission, NOT actual money transfer');
+          console.log('Missing validation: Balance changes are not verified');
+          console.log('Test gap: Cannot confirm if $10.00 was actually transferred between accounts');
           
           // Capture evidence of incomplete validation
           await page.screenshot({ path: 'screenshots/tc018-incomplete-validation-evidence.png' });
-          console.log('📸 Evidence of incomplete validation: tc018-incomplete-validation-evidence.png');
+          console.log('Evidence of incomplete validation: tc018-incomplete-validation-evidence.png');
           
         } else if (await errorMessage.count() > 0) {
           const errorText = await errorMessage.first().textContent();
-          console.log(`⚠️ Transfer validation: ${errorText}`);
+          console.log(`Transfer validation: ${errorText}`);
           await page.screenshot({ path: 'screenshots/tc018-transfer-error.png' });
-          console.log('📸 Error screenshot: tc018-transfer-error.png');
+          console.log('Error screenshot: tc018-transfer-error.png');
         } else {
           console.log('✓ Transfer form submitted - checking for validation or confirmation');
           await page.screenshot({ path: 'screenshots/tc018-transfer-unknown-state.png' });
-          console.log('📸 Unknown state screenshot: tc018-transfer-unknown-state.png');
+          console.log('Unknown state screenshot: tc018-transfer-unknown-state.png');
           
           // Log page content for debugging
           console.log(`🔍 Page content preview: ${pageContent?.substring(0, 300)}...`);
         }
         
         // Log final status with warning about test completeness
-        console.log('✓ Transfer validation completed');
-        console.log('❌ NOTE: This test does NOT validate actual financial transaction occurred');
+        console.log('Transfer validation completed');
+        console.log('NOTE: This test does NOT validate actual financial transaction occurred');
         
         // Take final state screenshot
         await page.screenshot({ path: 'screenshots/tc018-final-state.png' });
-        console.log('📸 Final state: tc018-final-state.png');
+        console.log(' Final state: tc018-final-state.png');
         
       } catch (error) {
         await page.screenshot({ path: 'screenshots/tc018-verification-failed.png' });
-        console.log('📸 Verification failed: tc018-verification-failed.png');
+        console.log('Verification failed: tc018-verification-failed.png');
         
         // Log additional debug info
         const currentUrl = page.url();
-        console.log(`❌ Verification failed at URL: ${currentUrl}`);
+        console.log(`Verification failed at URL: ${currentUrl}`);
         
         throw error;
       }
@@ -1067,7 +1067,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take screenshot before attempting transfer navigation
         await page.screenshot({ path: 'screenshots/tc019-before-transfer-navigation.png' });
-        console.log('📸 Before transfer navigation: tc019-before-transfer-navigation.png');
+        console.log('Before transfer navigation: tc019-before-transfer-navigation.png');
         
         await page.click('a[href="transfer.htm"]');
         await page.waitForLoadState('networkidle');
@@ -1075,16 +1075,16 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take success screenshot
         await page.screenshot({ path: 'screenshots/tc019-transfer-page-loaded.png' });
-        console.log('📸 Transfer page loaded: tc019-transfer-page-loaded.png');
+        console.log('Transfer page loaded: tc019-transfer-page-loaded.png');
         
       } catch (error) {
         // Take failure screenshot
         await page.screenshot({ path: 'screenshots/tc019-transfer-navigation-failed.png' });
-        console.log('📸 Transfer navigation failed: tc019-transfer-navigation-failed.png');
+        console.log('Transfer navigation failed: tc019-transfer-navigation-failed.png');
         
         // Log current URL for debugging
         const currentUrl = page.url();
-        console.log(`❌ Current URL: ${currentUrl}`);
+        console.log(`Current URL: ${currentUrl}`);
         
         throw error; // Re-throw to maintain test failure
       }
@@ -1120,7 +1120,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
       if (pageContent?.includes('must be greater than zero') || pageContent?.includes('positive') || await errorMessages.count() > 0) {
         console.log('✓ Validation error displayed for negative amount');
       } else {
-        console.log('⚠️ Expected validation error for negative amount');
+        console.log(' Expected validation error for negative amount');
       }
     });
 
@@ -1143,7 +1143,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
       if (pageContent?.includes('must be greater than zero') || pageContent?.includes('positive') || await errorMessages.count() > 0) {
         console.log('✓ Validation error displayed for zero amount');
       } else {
-        console.log('⚠️ Expected validation error for zero amount');
+        console.log('Expected validation error for zero amount');
       }
       
       console.log('✓ Amount validation tests completed');
@@ -1163,7 +1163,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take screenshot before attempting transfer navigation
         await page.screenshot({ path: 'screenshots/tc020-before-transfer-navigation.png' });
-        console.log('📸 Before transfer navigation: tc020-before-transfer-navigation.png');
+        console.log('Before transfer navigation: tc020-before-transfer-navigation.png');
         
         await page.click('a[href="transfer.htm"]');
         await page.waitForLoadState('networkidle');
@@ -1171,12 +1171,12 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         
         // Take success screenshot
         await page.screenshot({ path: 'screenshots/tc020-transfer-page-loaded.png' });
-        console.log('📸 Transfer page loaded: tc020-transfer-page-loaded.png');
+        console.log('Transfer page loaded: tc020-transfer-page-loaded.png');
         
       } catch (error) {
         // Take failure screenshot
         await page.screenshot({ path: 'screenshots/tc020-transfer-navigation-failed.png' });
-        console.log('📸 Transfer navigation failed: tc020-transfer-navigation-failed.png');
+        console.log(' Transfer navigation failed: tc020-transfer-navigation-failed.png');
         
         // Log current URL for debugging
         const currentUrl = page.url();
@@ -1201,7 +1201,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         await toAccountSelect.selectOption({ index: 0 });
         console.log('✓ Reset account selections to empty/placeholder values');
       } catch (error) {
-        console.log('⚠️ Could not reset account selections - they may already be empty');
+        console.log(' Could not reset account selections - they may already be empty');
       }
 
       // Submit transfer without proper account selection
@@ -1221,7 +1221,7 @@ test('TC09: Verify all form fields are accessible and accept appropriate input',
         const errorText = await errorMessages.first().textContent();
         console.log(`✓ Validation error found: ${errorText}`);
       } else {
-        console.log('⚠️ Expected validation error for missing account selection');
+        console.log(' Expected validation error for missing account selection');
       }
       
       console.log('✓ Account selection validation test completed');
