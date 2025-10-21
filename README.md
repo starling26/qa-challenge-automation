@@ -101,7 +101,7 @@ You need access to: https://parabank.parasoft.com (the page we're going to test)
    ```
 
 ### Option B: Download as ZIP
-1. Go to: https://github.com/starlingdelacruz/qa-challenge-automation
+1. Go to: https://github.com/starling26/qa-challenge-automation?tab=readme-ov-file
 2. Click the green "Code" button
 3. Select "Download ZIP"
 4. Unzip the file
