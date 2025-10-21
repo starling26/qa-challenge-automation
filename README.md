@@ -89,7 +89,7 @@ You need access to: https://parabank.parasoft.com (the page we're going to test)
    ```
 3. **Download** the project by typing:
    ```bash
-   git clone git@github.com:starling26/qa-challenge-automation.git
+   git clone https://github.com/starling26/qa-challenge-automation.git
    ```
 4. **Enter** the project folder:
    ```bash
