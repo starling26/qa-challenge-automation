@@ -5,7 +5,7 @@ const url = 'https://parabank.parasoft.com/parabank';
 test.describe('ParaBank Automated Tests', () => {
 
   test('TC_AUTO_001: Contact form is displayed', async ({ page }) => {
-    await page.goto(⁠ ${url}/contact.htm ⁠);
+    await page.goto(`${url}/contact.htm`);
 
     await expect(page.locator('#name')).toBeVisible();
     await expect(page.locator('#email')).toBeVisible();
@@ -15,7 +15,7 @@ test.describe('ParaBank Automated Tests', () => {
   });
 
   test('TC_AUTO_002: Validation on empty form submission', async ({ page }) => {
-    await page.goto(⁠ ${url}/contact.htm ⁠);
+    await page.goto(`${url}/contact.htm`);
     
     await page.locator('input[value="Send to Customer Care"]').click();
     
@@ -24,7 +24,7 @@ test.describe('ParaBank Automated Tests', () => {
   });
 
     test('TC_AUTO_003: Invalid email format is rejected', async ({ page }) => {
-      await page.goto(⁠ ${url}/contact.htm ⁠);
+      await page.goto(`${url}/contact.htm`);
 
       await page.locator('#name').fill('Starling');
       await page.locator('#email').fill('sdeg@yahoo.com');
@@ -40,7 +40,7 @@ test.describe('ParaBank Automated Tests', () => {
 
   test('TC_AUTO_004: Valid form submission', async ({ page }) => {
     await test.step('Navigate to contact page', async () => {
-      await page.goto(⁠ ${url}/contact.htm ⁠);
+      await page.goto(`${url}/contact.htm`);
       await page.waitForLoadState('networkidle');
     });
 
@@ -76,7 +76,7 @@ test.describe('ParaBank Automated Tests', () => {
   });
 
   test('TC_AUTO_005: Required fields are marked', async ({ page }) => {
-    await page.goto(⁠ ${url}/contact.htm ⁠);
+    await page.goto(`${url}/contact.htm`);
 
     await expect(page.locator('text=Name:')).toBeVisible();
     await expect(page.locator('text=Email:')).toBeVisible();
@@ -84,7 +84,7 @@ test.describe('ParaBank Automated Tests', () => {
   });
 
   test('TC_AUTO_006: Message field max length validation', async ({ page }) => {
-    await page.goto(⁠ ${url}/contact.htm ⁠);
+    await page.goto(`${url}/contact.htm`);
 
     await page.locator('#name').fill('Test User');
     await page.locator('#email').fill('test@gmail.com');
@@ -97,7 +97,7 @@ test.describe('ParaBank Automated Tests', () => {
   });
 
   test('TC_AUTO_007: Telephone field validation', async ({ page }) => {
-    await page.goto(⁠ ${url}/contact.htm ⁠);
+    await page.goto(`${url}/contact.htm`);
     
     await page.locator('#phone').fill('abcdefg');
     const lettersValue = await page.locator('#phone').inputValue();
