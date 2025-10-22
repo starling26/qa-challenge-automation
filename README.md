@@ -1,480 +1,574 @@
-# 🎭 QA Challenge - Complete Test Automation Guide
+# 🚀 QA Challenge Automation - Complete Test Suite
 
-This guide is designed for **beginners** who have never used test automation before. We will explain **step by step** how to install everything you need and run the automated tests for the ParaBank contact form.
+## � What This Project Does
 
-## What is this?
-This project contains **automated tests** that verify that a web page works correctly. The tests are written with **Playwright** (a tool that controls browsers) and **TypeScript** (a programming language).
+This project contains **automated tests** that verify web pages work correctly. Think of it as a robot that tests websites for you - it fills out forms, clicks buttons, and checks if everything works as expected.
 
----
-
-## 📋 Prerequisites (What you need to install first)
-
-### 1. What is Node.js and why do I need it?
-**Node.js** is a program that allows you to run JavaScript code on your computer (not just in browsers). We need it to run our tests.
-
-**How to know if you already have it installed?**
-1. Open the **Terminal** (I'll explain how below)
-2. Type: `node --version`
-3. If you see something like "v18.17.0" or higher, you already have it! 
-4. If not, continue with the installation
-
-**How to install Node.js?**
-1. Go to: https://nodejs.org
-2. Download the **LTS** version (recommended)
-3. Run the installer and follow the instructions
-4. Restart your computer
-5. Verify it's installed by typing `node --version` in the terminal
-
-### 2. What is Git and why do I need it?
-**Git** is a tool for downloading code from the internet and managing versions.
-
-**How to know if you already have it?**
-1. In the terminal, type: `git --version`
-2. If you see something like "git version 2.x.x", you already have it!
-
-**How to install Git?**
-- **Windows**: Go to https://git-scm.com and download the installer
-- **Mac**: It comes pre-installed, or install Xcode Command Line Tools
-- **Linux**: `sudo apt install git` (Ubuntu) or equivalent
-
-### 3. What is VS Code? (Recommended but optional)
-**VS Code** is a code editor that makes it easier to work with the project.
-
-**How to install it?**
-1. Go to: https://code.visualstudio.com
-2. Download and install
-3. Install the **Playwright** extension (it will help you a lot)
-
-### 4. Internet Connection
-You need access to: https://parabank.parasoft.com (the page we're going to test)
+**🎯 Main Goal:** Automatically test the ParaBank contact form to ensure all validation rules work properly.
 
 ---
 
-## 🖥️ How to Open the Terminal?
+## 🛠️ Technologies Used
 
-**The Terminal is where we will type commands to control our project.**
-
-### On Windows:
-1. Press `Windows + R`
-2. Type `cmd` and press Enter
-3. **OR** search for "Command Prompt" in the start menu
-
-### On Mac:
-1. Press `Cmd + Space`
-2. Type "Terminal" and press Enter
-3. **OR** go to Applications → Utilities → Terminal
-
-### On Linux:
-1. Press `Ctrl + Alt + T`
-2. **OR** search for "Terminal" in your applications
+- **Playwright** - Modern web testing framework
+- **TypeScript** - Type-safe JavaScript
+- **Node.js** - JavaScript runtime environment
+- **ParaBank** - Demo banking application for testing
 
 ---
 
-## 🚀 Step 1: Download the Project
+## 📦 What You Need Before Starting
 
-**What are we going to do?** Download all the project code from GitHub to your computer.
+### ✅ Step 1: Check Your Node.js Version
 
-### Option A: Use Git (Recommended)
-1. **Open the Terminal** (see instructions above)
-2. **Navigate** to where you want to save the project. For example, if you want to save it on your Desktop:
-   ```bash
-   # On Windows:
-   cd Desktop
-   
-   # On Mac:
-   cd ~/Desktop
-   
-   # On Linux:
-   cd ~/Desktop
-   ```
-3. **Download** the project by typing:
-   ```bash
-   git clone https://github.com/starling26/qa-challenge-automation.git
-   ```
-4. **Enter** the project folder:
-   ```bash
-   cd qa-challenge-automation
-   ```
-5. **Open** the project in VS Code (if you installed it):
-   ```bash
-   code .
-   ```
+**First, let's see what you have:**
+```bash
+node --version
+```
 
-### Option B: Download as ZIP
-1. Go to: https://github.com/starling26/qa-challenge-automation?tab=readme-ov-file
-2. Click the green "Code" button
-3. Select "Download ZIP"
-4. Unzip the file
-5. Open the Terminal and navigate to the unzipped folder
+**✅ Perfect! You're ready if you see:**
+- `v18.17.0` or higher
+- `v20.x.x` (any version 20)
+- `v21.x.x` or newer
 
----
+**⚠️ You need to update if you see:**
+- `v16.x.x` or lower
+- `command not found` (Node.js not installed)
+- No output at all
 
-## 🔧 Step 2: Install Dependencies
+### 🔄 Node.js Installation/Update Guide
 
-**What are dependencies?** They are code libraries that our project needs to function.
+#### Option A: Fresh Install (Recommended for beginners)
 
-**What are we going to install?**
-- **Playwright**: The tool that will control browsers
-- **Browsers**: Automatic Chrome, Firefox and Safari
-- **Other tools** that the project needs
+1. **Visit:** https://nodejs.org
+2. **Download:** The green "LTS" button (Long Term Support)
+3. **Install:** Run the downloaded file
+4. **Restart:** Your computer completely
+5. **Verify:** Open terminal and run `node --version`
 
-### Step-by-step instructions:
+#### Option B: Using Node Version Manager (For developers)
 
-1. **Make sure** you are inside the project folder:
-   ```bash
-   # You should be here (verify with):
-   pwd
-   # You should see something like: /Users/your-name/Desktop/qa-challenge-automation
-   ```
+**macOS/Linux users:**
+```bash
+# Install nvm (Node Version Manager)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
-2. **Install the project dependencies**:
-   ```bash
-   npm install
-   ```
-   **What's happening?** 📦
-   - All necessary tools are downloaded
-   - It can take 2-5 minutes
-   - You'll see a lot of text running, that's normal!
+# Restart your terminal, then:
+nvm install 20
+nvm use 20
+nvm alias default 20
 
-3. **Install the automatic browsers**:
-   ```bash
-   npx playwright install
-   ```
-   **What's happening?** 🌐
-   - Special versions of Chrome, Firefox and Safari are downloaded
-   - These versions are optimized for automation
-   - It can take 5-10 minutes and uses ~200MB
+# Verify
+node --version
+```
 
-4. **Verify** everything was installed correctly:
-   ```bash
-   npx playwright --version
-   ```
-   You should see something like: "Version 1.40.0"
+**Windows users:**
+1. Download **nvm-windows** from: https://github.com/coreybutler/nvm-windows/releases
+2. Install it (Run as Administrator)
+3. Open new Command Prompt as Administrator:
+```cmd
+nvm install 20.9.0
+nvm use 20.9.0
+node --version
+```
 
-### ⚠️ Did you have problems?
+#### Option C: Keep Your Current Version (Advanced)
 
-**If you see permission errors:**
-- On Mac/Linux: Try with `sudo npm install`
-- On Windows: Run Terminal as Administrator
+If you can't change your Node.js version, you can try:
+```bash
+# Clear npm cache first
+npm cache clean --force
 
-**If installation is very slow:**
-- Check your internet connection
-- Try at another time (servers might be busy)
+# Try installing with compatibility flags
+npm install --legacy-peer-deps
+```
+
+### 💻 How to Open Terminal/Command Prompt
+
+**Windows:**
+- Press `Windows + R` → type `cmd` → press Enter
+- OR: Search "Command Prompt" in Start menu
+- OR: Search "PowerShell" (more modern option)
+
+**Mac:**
+- Press `Cmd + Space` → type "Terminal" → press Enter
+- OR: Applications → Utilities → Terminal
+
+**Linux:**
+- Press `Ctrl + Alt + T`
+- OR: Search "Terminal" in applications
 
 ---
 
-## ⚙️ Step 3: Configuration (Optional)
+## 📥 Getting the Project
 
-**What is this?** You can change certain settings like the web page to be tested.
+### Method 1: Download ZIP (Easiest)
 
-**Do I need to do this?** No, the project is already configured to work. Only do this if you want to change something specific.
+1. **Go to:** https://github.com/starling26/qa-challenge-automation
+2. **Click:** Green "Code" button
+3. **Select:** "Download ZIP"
+4. **Extract:** The ZIP file to your Desktop
+5. **Navigate:** Open terminal and go to the folder:
 
-### If you want to change the configuration:
+```bash
+# Windows:
+cd Desktop\qa-challenge-automation-main
 
-1. **Create** a configuration file:
-   ```bash
-   # Create a .env file (environment file):
-   echo 'BASE_URL="https://parabank.parasoft.com"' > .env
-   echo 'PWDEBUG=0' >> .env
-   ```
+# Mac/Linux:
+cd ~/Desktop/qa-challenge-automation-main
+```
 
-2. **OR edit** the `playwright.config.ts` file directly if you know programming
+### Method 2: Using Git (If you know Git)
+
+```bash
+git clone https://github.com/starling26/qa-challenge-automation.git
+cd qa-challenge-automation
+```
 
 ---
 
-## 🏃‍♂️ Step 4: Run the Tests!
+## 🔧 Setting Everything Up
 
-**This is the exciting moment!** We're going to run the automated tests.
+### Step 1: Verify You're in the Right Place
 
-### Run all tests:
+```bash
+# Check current directory
+pwd
+
+# You should see something like:
+# /Users/yourname/Desktop/qa-challenge-automation
+# or C:\Users\yourname\Desktop\qa-challenge-automation
+```
+
+### Step 2: Install Project Dependencies
+
+```bash
+npm install
+```
+
+**What to expect:**
+- ⏳ Takes 2-5 minutes
+- 📝 Lots of text will scroll by (normal!)
+- ✅ Should end with "added X packages" message
+
+**If you get errors:**
+```bash
+# Try these solutions in order:
+
+# 1. Clear cache and try again
+npm cache clean --force
+npm install
+
+# 2. If Node version issues:
+npm install --legacy-peer-deps
+
+# 3. Delete everything and start fresh:
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Step 3: Install Browsers for Testing
+
+```bash
+npx playwright install
+```
+
+**What to expect:**
+- ⏳ Takes 5-15 minutes
+- 💾 Downloads ~300MB of browser files
+- 🌐 Installs Chromium, Firefox, and Safari engines
+
+**If installation fails:**
+```bash
+# Try force install:
+npx playwright install --force
+
+# Or install just Chrome:
+npx playwright install chromium
+
+# On Mac/Linux with permission issues:
+sudo npx playwright install
+```
+
+### Step 4: Verify Installation
+
+```bash
+npx playwright --version
+```
+
+**You should see:** Something like "Version 1.40.0" or newer
+
+---
+
+## 🎬 Running Your Tests
+
+### 🚀 Run All Tests (Headless Mode)
 
 ```bash
 npx playwright test
 ```
 
-**What will happen?** 🎬
-1. Browsers will open automatically
-2. You'll see web pages moving by themselves (like magic!)
-3. The tests will verify that everything works correctly
-4. At the end you'll see a results summary
+**What happens:**
+1. 🤖 Tests run invisibly in the background
+2. ⚡ Very fast execution
+3. 📊 Results appear in your terminal
+4. ✅ Green checkmarks = passed tests
+5. ❌ Red X's = failed tests
 
-### View the visual report:
+### 👀 Watch Tests Run (Headed Mode)
 
-After running the tests, you can see a nice report:
-
-```bash
-npx playwright show-report
-```
-
-**What will you see?** 📊
-- Your browser will open
-- You'll see a page with all the results
-- You can click to see details of each test
-- You can even see screenshots!
-
----
-
-## 🎯 Step 5: Advanced Execution Options
-
-### Run on specific browsers:
-
-**Why do this?** Different browsers can behave differently. It's good to test on several.
-
-```bash
-# Chrome only:
-npx playwright test --project=chromium
-
-# Firefox only:
-npx playwright test --project=firefox
-
-# Safari only (Mac only):
-npx playwright test --project=webkit
-```
-
-### See the tests running:
-
-**By default, browsers run "invisible".** If you want to see them in action:
+Want to see the magic happen? Run this:
 
 ```bash
 npx playwright test --headed
 ```
 
-**What will you see?** 👀
-- Browsers will open visibly
-- You can see how forms are filled automatically
-- Very useful to understand what's happening
+**What you'll see:**
+- 🌐 Browser windows open automatically
+- 🖱️ Mouse moves and clicks by itself
+- ⌨️ Forms get filled out automatically
+- 🎭 Like watching a ghost use your computer!
 
-### Run in slow mode (for beginners):
+### 📊 View Beautiful Test Reports
 
-If you want to see the actions slower:
+After tests finish:
 
 ```bash
-npx playwright test --headed --slowmo=1000
+npx playwright show-report
+```
+
+**What you get:**
+- 🌐 Opens in your web browser
+- � Visual charts and graphs
+- 📸 Screenshots of test steps
+- 🎥 Video recordings of failures
+- 🔍 Detailed logs for debugging
+
+---
+
+## 📁 Understanding the Project Structure
+
+```
+qa-challenge-automation/
+├── 📝 tests/
+│   └── contact-form.spec.ts      # Main test file
+├── � screenshots/               # Auto-captured images
+├── 📊 playwright-report/         # HTML reports
+├── 📋 test-results/              # Detailed test data
+├── ⚙️ playwright.config.ts       # Test configuration
+├── 📦 package.json               # Project dependencies
+└── 📖 README.md                  # This guide!
 ```
 
 ---
 
-## 🎪 Step 6: Run Specific Tests
+## 🧪 What Tests Are Included
 
-**What if I don't want to run all tests?** You can run only the ones that interest you.
+### 🔍 TC_AUTO_001: Form Visibility Check
+- ✅ Verifies contact form appears on page
+- ✅ Checks all required fields are present
+- ✅ Ensures form is interactive
 
-### Run a specific file:
+### � TC_AUTO_002: Required Fields Validation
+- ✅ Tests submitting empty form
+- ✅ Verifies error messages appear
+- ✅ Checks each required field individually
 
-```bash
-# Example: Only contact form tests
-npx playwright test tests/contact.spec.ts
-```
+### 📧 TC_AUTO_003: Email Format Validation
+- ✅ Tests invalid email formats
+- ✅ Verifies proper email validation
+- ✅ Checks various email edge cases
 
-### Run a specific test by name:
+### 📞 TC_AUTO_004: Phone Number Validation
+- ✅ Tests invalid phone formats
+- ✅ Verifies phone number requirements
+- ✅ Checks international number formats
 
-```bash
-# Search for tests containing certain words:
-npx playwright test -g "Contact form"
-npx playwright test -g "TC01"
-```
-
-### See what tests are available:
-
-```bash
-npx playwright test --list
-```
-
-**What will you see?** 📝
-- A list of all available tests
-- Their complete names
-- What files they're in
+### 📏 TC_AUTO_005: Field Length Limits
+- ✅ Tests maximum character limits
+- ✅ Verifies text truncation/rejection
+- ✅ Ensures data integrity
 
 ---
 
-## 📸 Step 7: Capture Evidence
-
-**Why is this important?** When something fails, you need evidence to understand what happened.
-
-### Enable automatic captures:
+## 🔍 Useful Commands Reference
 
 ```bash
-npx playwright test --trace on
-```
+# Basic commands
+npx playwright test                    # Run all tests
+npx playwright test --headed          # Run with visible browsers
+npx playwright show-report           # View test results
 
-**What does this do?** 🕵️‍♀️
-- Records EVERYTHING that happens during tests
-- If something fails, you have a complete "movie"
-- You can review step by step what went wrong
+# Specific test commands
+npx playwright test contact-form.spec.ts    # Run specific file
+npx playwright test --grep "email"          # Run tests matching "email"
+npx playwright test --project=chromium      # Run only in Chrome
 
-### View the captures:
+# Debug and development
+npx playwright test --debug               # Debug mode (breakpoints)
+npx playwright test --ui                  # Interactive UI mode
+npx playwright codegen                    # Record new tests
 
-```bash
-# This opens a visual interface to review errors:
-npx playwright show-trace trace.zip
-```
-
-### Automatic screenshots:
-
-Tests are already configured to take screenshots automatically. You'll find them in:
-- Folder: `screenshots/`
-- Descriptive names like: `tc01-before-submit.png`
-
----
-
-## 🐛 Step 8: Something Not Working? (Debugging)
-
-**Don't worry, it's normal for things to fail sometimes.** Here we help you solve it.
-
-### Detective mode (step by step):
-
-```bash
-npx playwright test --debug
-```
-
-**What happens?** 🔍
-- Tests pause at each step
-- You can click "Next" to advance
-- Perfect for understanding exactly where the problem is
-
-### Pause when something fails:
-
-```bash
-PWDEBUG=1 npx playwright test
-```
-
-**What does it do?** ⏸️
-- Only pauses when there's an error
-- Shows you exactly where it failed
-- You can investigate the page at that exact moment
-
-### Verbose mode (lots of information):
-
-```bash
-npx playwright test --reporter=line --workers=1
-```
-
-**When to use it?** 📢
-- When you need to see all the details
-- To understand the complete flow of tests
-- Useful for learning how tests work
-
----
-
-## 🎯 Quick Commands (Useful shortcuts)
-
-**Once you feel comfortable,** you can use these shorter commands:
-
-### If you're lazy about typing long commands:
-
-Add these "shortcuts" to your `package.json` file (if you know how to edit it):
-
-```json
-"scripts": {
-    "test": "playwright test",
-    "test:watch": "playwright test --headed",
-    "test:report": "playwright show-report",
-    "test:trace": "playwright test --trace on",
-    "test:debug": "playwright test --debug"
-}
-```
-
-Then you can use:
-```bash
-npm run test          # Instead of: npx playwright test
-npm run test:watch    # Instead of: npx playwright test --headed
-npm run test:report   # Instead of: npx playwright show-report
+# Information commands
+npx playwright test --list               # List all available tests
+npx playwright --version                 # Check Playwright version
+npx playwright install --dry-run         # Check what browsers need installing
 ```
 
 ---
 
-## 📁 Where Do I Find the Results?
+## 🆘 Troubleshooting Guide
 
-**After running the tests, several files are generated:**
+### ❌ Node.js Version Issues
 
-### 📊 Visual Report (HTML):
-- **Location**: `playwright-report/` folder
-- **How to view**: `npx playwright show-report`
-- **What it contains**: Nice graphics, statistics, details of each test
+**Problem:** "SyntaxError" or "Unexpected token" errors
 
-### 📸 Screenshots:
-- **Location**: `screenshots/` folder
-- **Names**: Descriptive like `tc01-error-validation.png`
-- **When they're taken**: Automatically at key moments
+**Solution:**
+```bash
+# Check your version
+node --version
 
-### 🎬 Recordings (Traces):
-- **Location**: `test-results/` folder
-- **How to view them**: `npx playwright show-trace file.zip`
-- **What they contain**: Complete "movies" of the tests
+# If you see v16 or lower:
+# 1. Go to https://nodejs.org
+# 2. Download and install LTS version
+# 3. Restart computer
+# 4. Try again
 
-### 📋 Terminal Reports:
-- **Shown**: Directly in the terminal after execution
-- **Contain**: Quick summary of what happened and how long it took
+# Alternative: Use Node Version Manager (see installation section above)
+```
 
----
+### ❌ Browser Installation Problems
 
-## 🚨 Common Problems and Solutions
-
-### "Can't install browsers"
-**Possible causes:**
-- Slow or unstable internet connection
-- Firewall or antivirus blocking the download
-- Low disk space
+**Problem:** "Browser not found" or download failures
 
 **Solutions:**
 ```bash
-# Try reinstalling:
+# Try 1: Force reinstall
 npx playwright install --force
 
-# Or install only Chrome:
+# Try 2: Install specific browser
 npx playwright install chromium
+
+# Try 3: Check system requirements
+npx playwright --help
+
+# Try 4: Clear cache and retry
+npm cache clean --force
+npx playwright install
 ```
 
-### "Tests fail randomly"
-**Why does this happen?** Web pages sometimes load slowly or differently.
+### ❌ Permission Denied Errors
+
+**Windows:**
+- Right-click Command Prompt → "Run as Administrator"
+- Or try: `npm install --unsafe-perm`
+
+**Mac/Linux:**
+```bash
+# Try with sudo (be careful!)
+sudo npx playwright install
+
+# Better: Fix npm permissions
+npm config set prefix ~/.npm-global
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### ❌ Tests Fail Randomly
+
+**This is normal!** Web tests can be flaky because:
+- Network delays
+- Page loading times
+- System performance
+
+**Solutions:**
+```bash
+# Run tests again (often fixes it)
+npx playwright test
+
+# Run with retries
+npx playwright test --retries=3
+
+# Run specific failing test
+npx playwright test --grep "failing-test-name"
+```
+
+### ❌ Antivirus False Positives
+
+**Problem:** Antivirus blocks browser downloads
 
 **Solution:**
-- It's normal, run the tests again
-- If it fails consistently, it might be a real bug
+1. Temporarily disable antivirus
+2. Add project folder to exceptions
+3. Add `node_modules` folder to exceptions
+4. Reinstall browsers
 
-### "I don't have permissions to create files"
-**On Windows:**
-- Run Terminal as Administrator
-- Right click → "Run as administrator"
+### ❌ Network/Firewall Issues
 
-**On Mac/Linux:**
+**Problem:** Downloads fail or tests can't reach websites
+
+**Solutions:**
 ```bash
-# Add sudo before the command:
-sudo npx playwright test
+# Try different npm registry
+npm config set registry https://registry.npmjs.org/
+
+# Check proxy settings if in corporate network
+npm config list
+
+# Install browsers manually if needed
+npx playwright install --dry-run  # Shows what's needed
 ```
 
-### "My antivirus says it's a virus"
-**This is normal.** Automatic browsers sometimes trigger alerts.
-- Add the project folder to exceptions
-- Or temporarily disable the antivirus
+---
+
+## 🐳 Alternative Setup with Docker
+
+If Node.js issues persist, use Docker:
+
+**Create Dockerfile:**
+```dockerfile
+FROM mcr.microsoft.com/playwright:v1.40.0-focal
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npx playwright install
+
+CMD ["npx", "playwright", "test"]
+```
+
+**Run with Docker:**
+```bash
+# Build image
+docker build -t qa-automation .
+
+# Run tests
+docker run --rm -v $(pwd)/test-results:/app/test-results qa-automation
+
+# View reports
+docker run --rm -p 9323:9323 -v $(pwd)/playwright-report:/app/playwright-report qa-automation npx playwright show-report --host 0.0.0.0
+```
+
+---
+
+## 📊 Understanding Test Results
+
+### ✅ When Tests Pass
+```
+Running 5 tests using 1 worker
+
+✓ TC_AUTO_001: Form visibility verification (2.3s)
+✓ TC_AUTO_002: Required field validation (1.8s)
+✓ TC_AUTO_003: Email format validation (2.1s)
+✓ TC_AUTO_004: Phone validation (1.9s)
+✓ TC_AUTO_005: Field length validation (2.0s)
+
+5 passed (10.1s)
+```
+
+### ❌ When Tests Fail
+```
+Running 5 tests using 1 worker
+
+✓ TC_AUTO_001: Form visibility verification (2.3s)
+✗ TC_AUTO_002: Required field validation (5.0s)
+
+1) TC_AUTO_002: Required field validation
+
+   Error: Expected error message to be visible
+   Actual: element not found
+```
+
+**Next steps for failures:**
+1. Run `npx playwright show-report` to see details
+2. Check screenshots in `test-results/` folder
+3. Look at video recordings of the failure
+4. Check if the website changed
+
+---
+
+## � System Requirements
+
+**Minimum Requirements:**
+- ✅ Node.js 18.0+ (LTS recommended)
+- ✅ 4 GB RAM
+- ✅ 2 GB free disk space
+- ✅ Internet connection
+
+**Recommended Setup:**
+- 🚀 Node.js 20.x LTS
+- 🚀 8 GB RAM
+- 🚀 5 GB free disk space
+- 🚀 Fast, stable internet
+
+**Supported Operating Systems:**
+- ✅ Windows 10/11
+- ✅ macOS 10.15+
+- ✅ Ubuntu 18.04+
+- ✅ Most Linux distributions
+
+---
+
+## 🎉 Success! You're Done!
+
+If you've made it this far and tests are running, **congratulations!** 🎊
+
+**Remember these key commands:**
+```bash
+npx playwright test              # Run tests
+npx playwright show-report     # View results
+npx playwright test --headed   # Watch tests run
+```
+
+---
+
+## 🤝 Contributing to This Project
+
+Want to improve these tests?
+
+1. 🍴 **Fork** the repository on GitHub
+2. 🌱 **Create** a new branch: `git checkout -b feature/amazing-feature`
+3. 💾 **Commit** your changes: `git commit -m 'Add amazing feature'`
+4. 📤 **Push** to branch: `git push origin feature/amazing-feature`
+5. 🔄 **Open** a Pull Request
+
+---
+
+## 📞 Get Help
+
+**Having issues?**
+
+1. 🔍 **Check** the troubleshooting section above
+2. � **Create an issue** at: https://github.com/starling26/qa-challenge-automation/issues
+3. � **Include this info:**
+   - Your operating system
+   - Node.js version (`node --version`)
+   - npm version (`npm --version`)
+   - Exact error message
+   - What command you ran
+
+**Example good bug report:**
+```
+OS: macOS 13.0
+Node: v18.17.0
+npm: 9.6.7
+Command: npx playwright test
+Error: "Browser not found"
+```
 
 ---
 
 ## 📚 Additional Resources
 
-### If you want to learn more:
-- **Official documentation**: https://playwright.dev
-- **YouTube tutorials**: Search for "Playwright tutorial"
-- **This project**: https://github.com/starlingdelacruz/qa-challenge-automation
-
-### If you have questions:
-- **GitHub Issues**: Create an "issue" in the repository
-- **Community**: Look for QA automation groups in your country
-- **Stack Overflow**: Ask questions with the "playwright" tag
+- 📖 [Playwright Documentation](https://playwright.dev)
+- 🎥 [Playwright YouTube Channel](https://www.youtube.com/@Playwrightdev)
+- 💬 [Playwright Discord Community](https://discord.gg/playwright)
+- 🐛 [Report Playwright Issues](https://github.com/microsoft/playwright/issues)
 
 ---
 
-## 🎉 Congratulations!
+*💡 **Pro Tip:** Bookmark this README! You'll refer back to it often. And remember - if something breaks, try running the tests again. Web testing can be temperamental, but that's normal!*
 
-If you made it this far and managed to run the tests, **you're now part of the test automation world!**
 
-**What's next?**
-1. 🎮 Experiment with different commands
-2. 📖 Read the test files to understand how they work
-3. 🔧 Try modifying a test (make a copy first)
-4. 🚀 Consider learning more about automation!
 
-**Remember:** Automation is like learning to drive. At first it seems complicated, but once you get the hang of it, it's super useful and fun!
-
----
-
-*💡 Final tip: Always make a backup before modifying something important. And don't be afraid to experiment, that's how you learn!*
