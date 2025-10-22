@@ -1,10 +1,10 @@
-<testsuites id="" name="" tests="7" failures="3" skipped="0" errors="0" time="3.8056789999976752">
-<testsuite name="contact-form.spec.ts" timestamp="2025-10-22T18:21:43.726Z" hostname="chromium" tests="7" failures="3" skipped="0" time="7.444" errors="0">
-<testcase name="ParaBank Automated Tests › TC_AUTO_001: Contact form is displayed" classname="contact-form.spec.ts" time="1.025">
+<testsuites id="" name="" tests="7" failures="3" skipped="0" errors="0" time="3.8571239999999962">
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-22T18:32:24.526Z" hostname="chromium" tests="7" failures="3" skipped="0" time="8.199" errors="0">
+<testcase name="ParaBank Automated Tests › TC_AUTO_001: Contact form is displayed" classname="contact-form.spec.ts" time="1.069">
 </testcase>
-<testcase name="ParaBank Automated Tests › TC_AUTO_002: Validation on empty form submission" classname="contact-form.spec.ts" time="1.202">
+<testcase name="ParaBank Automated Tests › TC_AUTO_002: Validation on empty form submission" classname="contact-form.spec.ts" time="1.315">
 </testcase>
-<testcase name="ParaBank Automated Tests › TC_AUTO_003: Invalid email format is rejected" classname="contact-form.spec.ts" time="1.184">
+<testcase name="ParaBank Automated Tests › TC_AUTO_003: Invalid email format is rejected" classname="contact-form.spec.ts" time="1.625">
 <failure message="contact-form.spec.ts:26:9 TC_AUTO_003: Invalid email format is rejected" type="FAILURE">
 <![CDATA[  [chromium] › contact-form.spec.ts:26:9 › ParaBank Automated Tests › TC_AUTO_003: Invalid email format is rejected 
 
@@ -20,17 +20,17 @@
       37 |     });
       38 |
       39 |
-        at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:36:26
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:36:26
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/test-failed-1.png
+    ../../test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ../test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/video.webm
+    ../../test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    Error Context: ../test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/error-context.md
+    Error Context: ../../test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/error-context.md
 ]]>
 </failure>
 <system-out>
@@ -43,7 +43,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="ParaBank Automated Tests › TC_AUTO_004: Valid form submission" classname="contact-form.spec.ts" time="1.802">
+<testcase name="ParaBank Automated Tests › TC_AUTO_004: Valid form submission" classname="contact-form.spec.ts" time="1.965">
 <system-out>
 <![CDATA[Form values: {
   name: [32m'Starling De la Cruz'[39m,
@@ -54,9 +54,9 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="ParaBank Automated Tests › TC_AUTO_005: Required fields are marked" classname="contact-form.spec.ts" time="0.527">
+<testcase name="ParaBank Automated Tests › TC_AUTO_005: Required fields are marked" classname="contact-form.spec.ts" time="0.81">
 </testcase>
-<testcase name="ParaBank Automated Tests › TC_AUTO_006: Message field max length validation" classname="contact-form.spec.ts" time="0.892">
+<testcase name="ParaBank Automated Tests › TC_AUTO_006: Message field max length validation" classname="contact-form.spec.ts" time="0.747">
 <failure message="contact-form.spec.ts:86:7 TC_AUTO_006: Message field max length validation" type="FAILURE">
 <![CDATA[  [chromium] › contact-form.spec.ts:86:7 › ParaBank Automated Tests › TC_AUTO_006: Message field max length validation 
 
@@ -72,17 +72,17 @@
       97 |   });
       98 |
       99 |   test('TC_AUTO_007: Telephone field validation', async ({ page }) => {
-        at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:96:33
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:96:33
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/test-failed-1.png
+    ../../test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ../test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/video.webm
+    ../../test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    Error Context: ../test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/error-context.md
+    Error Context: ../../test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/error-context.md
 ]]>
 </failure>
 <system-out>
@@ -95,7 +95,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="ParaBank Automated Tests › TC_AUTO_007: Telephone field validation" classname="contact-form.spec.ts" time="0.812">
+<testcase name="ParaBank Automated Tests › TC_AUTO_007: Telephone field validation" classname="contact-form.spec.ts" time="0.668">
 <failure message="contact-form.spec.ts:99:7 TC_AUTO_007: Telephone field validation" type="FAILURE">
 <![CDATA[  [chromium] › contact-form.spec.ts:99:7 › ParaBank Automated Tests › TC_AUTO_007: Telephone field validation 
 
@@ -111,17 +111,17 @@
       106 |   });
       107 |
       108 | });
-        at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:105:26
+        at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:105:26
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ../test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/test-failed-1.png
+    ../../test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ../test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/video.webm
+    ../../test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    Error Context: ../test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/error-context.md
+    Error Context: ../../test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/error-context.md
 ]]>
 </failure>
 <system-out>

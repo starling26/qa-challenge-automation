@@ -1,7 +1,7 @@
 {
   "config": {
     "configFile": "/Users/starlingdelacruz/qa-challenge-automation/playwright.config.ts",
-    "rootDir": "/Users/starlingdelacruz/qa-challenge-automation/tests",
+    "rootDir": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests",
     "forbidOnly": false,
     "fullyParallel": true,
     "globalSetup": null,
@@ -47,7 +47,7 @@
         },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/tests",
+        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests",
         "testIgnore": [
           "**/node_modules/**",
           "**/dist/**"
@@ -67,7 +67,7 @@
         },
         "id": "firefox",
         "name": "firefox",
-        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/tests",
+        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests",
         "testIgnore": [
           "**/node_modules/**",
           "**/dist/**"
@@ -87,7 +87,7 @@
         },
         "id": "webkit",
         "name": "webkit",
-        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/tests",
+        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests",
         "testIgnore": [
           "**/node_modules/**",
           "**/dist/**"
@@ -107,7 +107,7 @@
         },
         "id": "mobile-chrome",
         "name": "mobile-chrome",
-        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/tests",
+        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests",
         "testIgnore": [
           "**/node_modules/**",
           "**/dist/**"
@@ -127,7 +127,7 @@
         },
         "id": "mobile-safari",
         "name": "mobile-safari",
-        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/tests",
+        "testDir": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests",
         "testIgnore": [
           "**/node_modules/**",
           "**/dist/**"
@@ -173,15 +173,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 17,
+                      "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1025,
+                      "duration": 1069,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-22T18:21:44.129Z",
+                      "startTime": "2025-10-22T18:32:24.882Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -207,15 +207,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 18,
+                      "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 1202,
+                      "duration": 1315,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-22T18:21:44.111Z",
+                      "startTime": "2025-10-22T18:32:24.890Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -241,15 +241,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 19,
+                      "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "failed",
-                      "duration": 1184,
+                      "duration": 1625,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/@gmail\\.com$/\u001b[39m\nReceived string:  \u001b[31m\"sdeg@yahoo.com\"\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/@gmail\\.com$/\u001b[39m\nReceived string:  \u001b[31m\"sdeg@yahoo.com\"\u001b[39m\n    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:36:26",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/@gmail\\.com$/\u001b[39m\nReceived string:  \u001b[31m\"sdeg@yahoo.com\"\u001b[39m\n    at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:36:26",
                         "location": {
-                          "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                          "file": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts",
                           "column": 26,
                           "line": 36
                         },
@@ -258,17 +258,17 @@
                       "errors": [
                         {
                           "location": {
-                            "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                            "file": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts",
                             "column": 26,
                             "line": 36
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/@gmail\\.com$/\u001b[39m\nReceived string:  \u001b[31m\"sdeg@yahoo.com\"\u001b[39m\n\n\u001b[0m \u001b[90m 34 |\u001b[39m       \u001b[36mconst\u001b[39m emailValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#email'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m       \u001b[90m// El test debe fallar si el correo NO termina en @gmail.com\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m       expect(emailValue)\u001b[33m.\u001b[39mtoMatch(\u001b[35m/@gmail\\.com$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m\u001b[0m\n\u001b[2m    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:36:26\u001b[22m"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/@gmail\\.com$/\u001b[39m\nReceived string:  \u001b[31m\"sdeg@yahoo.com\"\u001b[39m\n\n\u001b[0m \u001b[90m 34 |\u001b[39m       \u001b[36mconst\u001b[39m emailValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#email'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m       \u001b[90m// El test debe fallar si el correo NO termina en @gmail.com\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m       expect(emailValue)\u001b[33m.\u001b[39mtoMatch(\u001b[35m/@gmail\\.com$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m\u001b[0m\n\u001b[2m    at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:36:26\u001b[22m"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-22T18:21:44.121Z",
+                      "startTime": "2025-10-22T18:32:24.884Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -288,7 +288,7 @@
                         }
                       ],
                       "errorLocation": {
-                        "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                        "file": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts",
                         "column": 26,
                         "line": 36
                       }
@@ -315,10 +315,10 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 20,
+                      "workerIndex": 3,
                       "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 1802,
+                      "duration": 1965,
                       "errors": [],
                       "stdout": [
                         {
@@ -330,18 +330,18 @@
                       "steps": [
                         {
                           "title": "Navigate to contact page",
-                          "duration": 1237
+                          "duration": 1205
                         },
                         {
                           "title": "Fill contact form",
-                          "duration": 98
+                          "duration": 104
                         },
                         {
                           "title": "Submit form and verify submission",
-                          "duration": 295
+                          "duration": 307
                         }
                       ],
-                      "startTime": "2025-10-22T18:21:44.112Z",
+                      "startTime": "2025-10-22T18:32:24.878Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -367,15 +367,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 17,
+                      "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 527,
+                      "duration": 810,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-22T18:21:45.332Z",
+                      "startTime": "2025-10-22T18:32:26.281Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -401,15 +401,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 21,
-                      "parallelIndex": 2,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "failed",
-                      "duration": 892,
+                      "duration": 747,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10000\u001b[39m\nReceived:    \u001b[31m10001\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10000\u001b[39m\nReceived:    \u001b[31m10001\u001b[39m\n    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:96:33",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10000\u001b[39m\nReceived:    \u001b[31m10001\u001b[39m\n    at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:96:33",
                         "location": {
-                          "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                          "file": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts",
                           "column": 33,
                           "line": 96
                         },
@@ -418,17 +418,17 @@
                       "errors": [
                         {
                           "location": {
-                            "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                            "file": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts",
                             "column": 33,
                             "line": 96
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10000\u001b[39m\nReceived:    \u001b[31m10001\u001b[39m\n\n\u001b[0m \u001b[90m 94 |\u001b[39m     \n \u001b[90m 95 |\u001b[39m     \u001b[36mconst\u001b[39m messageValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#message'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m     expect(messageValue\u001b[33m.\u001b[39mlength)\u001b[33m.\u001b[39mtoBeLessThanOrEqual(\u001b[35m10000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 98 |\u001b[39m\n \u001b[90m 99 |\u001b[39m   test(\u001b[32m'TC_AUTO_007: Telephone field validation'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:96:33\u001b[22m"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10000\u001b[39m\nReceived:    \u001b[31m10001\u001b[39m\n\n\u001b[0m \u001b[90m 94 |\u001b[39m     \n \u001b[90m 95 |\u001b[39m     \u001b[36mconst\u001b[39m messageValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#message'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m     expect(messageValue\u001b[33m.\u001b[39mlength)\u001b[33m.\u001b[39mtoBeLessThanOrEqual(\u001b[35m10000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 98 |\u001b[39m\n \u001b[90m 99 |\u001b[39m   test(\u001b[32m'TC_AUTO_007: Telephone field validation'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:96:33\u001b[22m"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-22T18:21:45.867Z",
+                      "startTime": "2025-10-22T18:32:26.528Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -448,7 +448,7 @@
                         }
                       ],
                       "errorLocation": {
-                        "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                        "file": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts",
                         "column": 33,
                         "line": 96
                       }
@@ -475,15 +475,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 18,
-                      "parallelIndex": 1,
+                      "workerIndex": 4,
+                      "parallelIndex": 2,
                       "status": "failed",
-                      "duration": 812,
+                      "duration": 668,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^[0-9]*$/\u001b[39m\nReceived string:  \u001b[31m\"abcdefg\"\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^[0-9]*$/\u001b[39m\nReceived string:  \u001b[31m\"abcdefg\"\u001b[39m\n    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:105:26",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^[0-9]*$/\u001b[39m\nReceived string:  \u001b[31m\"abcdefg\"\u001b[39m\n    at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:105:26",
                         "location": {
-                          "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                          "file": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts",
                           "column": 26,
                           "line": 105
                         },
@@ -492,17 +492,17 @@
                       "errors": [
                         {
                           "location": {
-                            "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                            "file": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts",
                             "column": 26,
                             "line": 105
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^[0-9]*$/\u001b[39m\nReceived string:  \u001b[31m\"abcdefg\"\u001b[39m\n\n\u001b[0m \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m lettersValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#phone'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n \u001b[90m 104 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 105 |\u001b[39m     expect(lettersValue)\u001b[33m.\u001b[39mtoMatch(\u001b[35m/^[0-9]*$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 106 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 107 |\u001b[39m\n \u001b[90m 108 |\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:105:26\u001b[22m"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^[0-9]*$/\u001b[39m\nReceived string:  \u001b[31m\"abcdefg\"\u001b[39m\n\n\u001b[0m \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m lettersValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#phone'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n \u001b[90m 104 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 105 |\u001b[39m     expect(lettersValue)\u001b[33m.\u001b[39mtoMatch(\u001b[35m/^[0-9]*$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 106 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 107 |\u001b[39m\n \u001b[90m 108 |\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts:105:26\u001b[22m"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-10-22T18:21:45.504Z",
+                      "startTime": "2025-10-22T18:32:27.270Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -522,7 +522,7 @@
                         }
                       ],
                       "errorLocation": {
-                        "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                        "file": "/Users/starlingdelacruz/qa-challenge-automation/qa-challenge-automation/tests/contact-form.spec.ts",
                         "column": 26,
                         "line": 105
                       }
@@ -543,8 +543,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-10-22T18:21:43.072Z",
-    "duration": 3805.6789999976754,
+    "startTime": "2025-10-22T18:32:24.207Z",
+    "duration": 3857.123999999996,
     "expected": 4,
     "skipped": 0,
     "unexpected": 3,
