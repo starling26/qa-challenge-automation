@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 0
+      "actualWorkers": 4
     },
     "preserveOutput": "always",
     "reporter": [
@@ -43,7 +43,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 0
+          "actualWorkers": 4
         },
         "id": "chromium",
         "name": "chromium",
@@ -63,7 +63,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 0
+          "actualWorkers": 4
         },
         "id": "firefox",
         "name": "firefox",
@@ -83,7 +83,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 0
+          "actualWorkers": 4
         },
         "id": "webkit",
         "name": "webkit",
@@ -103,7 +103,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 0
+          "actualWorkers": 4
         },
         "id": "mobile-chrome",
         "name": "mobile-chrome",
@@ -123,7 +123,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 0
+          "actualWorkers": 4
         },
         "id": "mobile-safari",
         "name": "mobile-safari",
@@ -146,18 +146,408 @@
     "workers": 4,
     "webServer": null
   },
-  "suites": [],
-  "errors": [
+  "suites": [
     {
-      "message": "Test loader process failed to start with code \"1\" and signal \"null\""
+      "title": "contact-form.spec.ts",
+      "file": "contact-form.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "ParaBank Automated Tests",
+          "file": "contact-form.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_AUTO_001: Contact form is displayed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1025,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-22T18:21:44.129Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "19bfce10c51128c14abd-dbe6ef2b97378d170f61",
+              "file": "contact-form.spec.ts",
+              "line": 7,
+              "column": 7
+            },
+            {
+              "title": "TC_AUTO_002: Validation on empty form submission",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1202,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-22T18:21:44.111Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "19bfce10c51128c14abd-0c805b479a1e8747c9c6",
+              "file": "contact-form.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "TC_AUTO_003: Invalid email format is rejected",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 1184,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/@gmail\\.com$/\u001b[39m\nReceived string:  \u001b[31m\"sdeg@yahoo.com\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/@gmail\\.com$/\u001b[39m\nReceived string:  \u001b[31m\"sdeg@yahoo.com\"\u001b[39m\n    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:36:26",
+                        "location": {
+                          "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                          "column": 26,
+                          "line": 36
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 34 |\u001b[39m       \u001b[36mconst\u001b[39m emailValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#email'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m       \u001b[90m// El test debe fallar si el correo NO termina en @gmail.com\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m       expect(emailValue)\u001b[33m.\u001b[39mtoMatch(\u001b[35m/@gmail\\.com$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                            "column": 26,
+                            "line": 36
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/@gmail\\.com$/\u001b[39m\nReceived string:  \u001b[31m\"sdeg@yahoo.com\"\u001b[39m\n\n\u001b[0m \u001b[90m 34 |\u001b[39m       \u001b[36mconst\u001b[39m emailValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#email'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m       \u001b[90m// El test debe fallar si el correo NO termina en @gmail.com\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 36 |\u001b[39m       expect(emailValue)\u001b[33m.\u001b[39mtoMatch(\u001b[35m/@gmail\\.com$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 37 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m\n \u001b[90m 39 |\u001b[39m\u001b[0m\n\u001b[2m    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:36:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-22T18:21:44.121Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/starlingdelacruz/qa-challenge-automation/test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/starlingdelacruz/qa-challenge-automation/test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/starlingdelacruz/qa-challenge-automation/test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                        "column": 26,
+                        "line": 36
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "19bfce10c51128c14abd-1d7273af0c7c0f4865c5",
+              "file": "contact-form.spec.ts",
+              "line": 26,
+              "column": 9
+            },
+            {
+              "title": "TC_AUTO_004: Valid form submission",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 1802,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Form values: {\n  name: \u001b[32m'Starling De la Cruz'\u001b[39m,\n  email: \u001b[32m'starling@gmail.com'\u001b[39m,\n  phone: \u001b[32m'8091234567'\u001b[39m,\n  message: \u001b[32m'This is a valid test message for QA automation challenge'\u001b[39m\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Navigate to contact page",
+                          "duration": 1237
+                        },
+                        {
+                          "title": "Fill contact form",
+                          "duration": 98
+                        },
+                        {
+                          "title": "Submit form and verify submission",
+                          "duration": 295
+                        }
+                      ],
+                      "startTime": "2025-10-22T18:21:44.112Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "19bfce10c51128c14abd-b3d6f1ac38222cd038e4",
+              "file": "contact-form.spec.ts",
+              "line": 41,
+              "column": 7
+            },
+            {
+              "title": "TC_AUTO_005: Required fields are marked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 527,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-22T18:21:45.332Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "19bfce10c51128c14abd-ee49c112b174c9a1b31a",
+              "file": "contact-form.spec.ts",
+              "line": 78,
+              "column": 7
+            },
+            {
+              "title": "TC_AUTO_006: Message field max length validation",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 892,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10000\u001b[39m\nReceived:    \u001b[31m10001\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10000\u001b[39m\nReceived:    \u001b[31m10001\u001b[39m\n    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:96:33",
+                        "location": {
+                          "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                          "column": 33,
+                          "line": 96
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 94 |\u001b[39m     \n \u001b[90m 95 |\u001b[39m     \u001b[36mconst\u001b[39m messageValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#message'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m     expect(messageValue\u001b[33m.\u001b[39mlength)\u001b[33m.\u001b[39mtoBeLessThanOrEqual(\u001b[35m10000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 98 |\u001b[39m\n \u001b[90m 99 |\u001b[39m   test(\u001b[32m'TC_AUTO_007: Telephone field validation'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                            "column": 33,
+                            "line": 96
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10000\u001b[39m\nReceived:    \u001b[31m10001\u001b[39m\n\n\u001b[0m \u001b[90m 94 |\u001b[39m     \n \u001b[90m 95 |\u001b[39m     \u001b[36mconst\u001b[39m messageValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#message'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 96 |\u001b[39m     expect(messageValue\u001b[33m.\u001b[39mlength)\u001b[33m.\u001b[39mtoBeLessThanOrEqual(\u001b[35m10000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 97 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 98 |\u001b[39m\n \u001b[90m 99 |\u001b[39m   test(\u001b[32m'TC_AUTO_007: Telephone field validation'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:96:33\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-22T18:21:45.867Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/starlingdelacruz/qa-challenge-automation/test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/starlingdelacruz/qa-challenge-automation/test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/starlingdelacruz/qa-challenge-automation/test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                        "column": 33,
+                        "line": 96
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "19bfce10c51128c14abd-4f7698c5b0c271f7bb71",
+              "file": "contact-form.spec.ts",
+              "line": 86,
+              "column": 7
+            },
+            {
+              "title": "TC_AUTO_007: Telephone field validation",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 812,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^[0-9]*$/\u001b[39m\nReceived string:  \u001b[31m\"abcdefg\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^[0-9]*$/\u001b[39m\nReceived string:  \u001b[31m\"abcdefg\"\u001b[39m\n    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:105:26",
+                        "location": {
+                          "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                          "column": 26,
+                          "line": 105
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m lettersValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#phone'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n \u001b[90m 104 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 105 |\u001b[39m     expect(lettersValue)\u001b[33m.\u001b[39mtoMatch(\u001b[35m/^[0-9]*$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 106 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 107 |\u001b[39m\n \u001b[90m 108 |\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                            "column": 26,
+                            "line": 105
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/^[0-9]*$/\u001b[39m\nReceived string:  \u001b[31m\"abcdefg\"\u001b[39m\n\n\u001b[0m \u001b[90m 103 |\u001b[39m     \u001b[36mconst\u001b[39m lettersValue \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'#phone'\u001b[39m)\u001b[33m.\u001b[39minputValue()\u001b[33m;\u001b[39m\n \u001b[90m 104 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 105 |\u001b[39m     expect(lettersValue)\u001b[33m.\u001b[39mtoMatch(\u001b[35m/^[0-9]*$/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 106 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 107 |\u001b[39m\n \u001b[90m 108 |\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:105:26\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-22T18:21:45.504Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/starlingdelacruz/qa-challenge-automation/test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/starlingdelacruz/qa-challenge-automation/test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/starlingdelacruz/qa-challenge-automation/test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts",
+                        "column": 26,
+                        "line": 105
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "19bfce10c51128c14abd-7a13c44821b7f564d0cb",
+              "file": "contact-form.spec.ts",
+              "line": 99,
+              "column": 7
+            }
+          ]
+        }
+      ]
     }
   ],
+  "errors": [],
   "stats": {
-    "startTime": "2025-10-22T02:43:04.123Z",
-    "duration": 43.69800000009127,
-    "expected": 0,
+    "startTime": "2025-10-22T18:21:43.072Z",
+    "duration": 3805.6789999976754,
+    "expected": 4,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 3,
     "flaky": 0
   }
 }

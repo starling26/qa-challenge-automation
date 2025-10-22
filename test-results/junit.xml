@@ -1,2 +1,138 @@
-<testsuites id="" name="" tests="0" failures="0" skipped="0" errors="0" time="0.04369800000009127">
+<testsuites id="" name="" tests="7" failures="3" skipped="0" errors="0" time="3.8056789999976752">
+<testsuite name="contact-form.spec.ts" timestamp="2025-10-22T18:21:43.726Z" hostname="chromium" tests="7" failures="3" skipped="0" time="7.444" errors="0">
+<testcase name="ParaBank Automated Tests › TC_AUTO_001: Contact form is displayed" classname="contact-form.spec.ts" time="1.025">
+</testcase>
+<testcase name="ParaBank Automated Tests › TC_AUTO_002: Validation on empty form submission" classname="contact-form.spec.ts" time="1.202">
+</testcase>
+<testcase name="ParaBank Automated Tests › TC_AUTO_003: Invalid email format is rejected" classname="contact-form.spec.ts" time="1.184">
+<failure message="contact-form.spec.ts:26:9 TC_AUTO_003: Invalid email format is rejected" type="FAILURE">
+<![CDATA[  [chromium] › contact-form.spec.ts:26:9 › ParaBank Automated Tests › TC_AUTO_003: Invalid email format is rejected 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /@gmail\.com$/
+    Received string:  "sdeg@yahoo.com"
+
+      34 |       const emailValue = await page.locator('#email').inputValue();
+      35 |       // El test debe fallar si el correo NO termina en @gmail.com
+    > 36 |       expect(emailValue).toMatch(/@gmail\.com$/);
+         |                          ^
+      37 |     });
+      38 |
+      39 |
+        at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:36:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/video.webm]]
+
+[[ATTACHMENT|contact-form-ParaBank-Auto-581b5-id-email-format-is-rejected-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="ParaBank Automated Tests › TC_AUTO_004: Valid form submission" classname="contact-form.spec.ts" time="1.802">
+<system-out>
+<![CDATA[Form values: {
+  name: [32m'Starling De la Cruz'[39m,
+  email: [32m'starling@gmail.com'[39m,
+  phone: [32m'8091234567'[39m,
+  message: [32m'This is a valid test message for QA automation challenge'[39m
+}
+]]>
+</system-out>
+</testcase>
+<testcase name="ParaBank Automated Tests › TC_AUTO_005: Required fields are marked" classname="contact-form.spec.ts" time="0.527">
+</testcase>
+<testcase name="ParaBank Automated Tests › TC_AUTO_006: Message field max length validation" classname="contact-form.spec.ts" time="0.892">
+<failure message="contact-form.spec.ts:86:7 TC_AUTO_006: Message field max length validation" type="FAILURE">
+<![CDATA[  [chromium] › contact-form.spec.ts:86:7 › ParaBank Automated Tests › TC_AUTO_006: Message field max length validation 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 10000
+    Received:    10001
+
+      94 |     
+      95 |     const messageValue = await page.locator('#message').inputValue();
+    > 96 |     expect(messageValue.length).toBeLessThanOrEqual(10000);
+         |                                 ^
+      97 |   });
+      98 |
+      99 |   test('TC_AUTO_007: Telephone field validation', async ({ page }) => {
+        at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:96:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/video.webm]]
+
+[[ATTACHMENT|contact-form-ParaBank-Auto-83550-field-max-length-validation-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="ParaBank Automated Tests › TC_AUTO_007: Telephone field validation" classname="contact-form.spec.ts" time="0.812">
+<failure message="contact-form.spec.ts:99:7 TC_AUTO_007: Telephone field validation" type="FAILURE">
+<![CDATA[  [chromium] › contact-form.spec.ts:99:7 › ParaBank Automated Tests › TC_AUTO_007: Telephone field validation 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /^[0-9]*$/
+    Received string:  "abcdefg"
+
+      103 |     const lettersValue = await page.locator('#phone').inputValue();
+      104 |     
+    > 105 |     expect(lettersValue).toMatch(/^[0-9]*$/);
+          |                          ^
+      106 |   });
+      107 |
+      108 | });
+        at /Users/starlingdelacruz/qa-challenge-automation/tests/contact-form.spec.ts:105:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/video.webm]]
+
+[[ATTACHMENT|contact-form-ParaBank-Auto-88b5e--Telephone-field-validation-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
 </testsuites>

@@ -70,7 +70,7 @@ test.describe('ParaBank Automated Tests', () => {
     await test.step('Submit form and verify submission', async () => {
       await page.locator('input[value="Send to Customer Care"]').click();
       // Verification: ensure we remain or return to contact page (submission indicator)
-      await expect(page).toHaveURL(/.contact\.htm./);
+      await expect(page).toHaveURL(url + '/contact.htm');
       await page.screenshot({ path: 'screenshots/TC_AUTO_004-after-submit.png' });
     });
   });
