@@ -570,6 +570,5 @@ Error: "Browser not found"
 
 *💡 **Pro Tip:** Bookmark this README! You'll refer back to it often. And remember - if something breaks, try running the tests again. Web testing can be temperamental, but that's normal!*
 
----
 
-**Made with ❤️ for QA Engineers everywhere**
+
