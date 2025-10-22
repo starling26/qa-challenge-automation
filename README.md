@@ -18,6 +18,14 @@ This project contains **automated tests** that verify that a web page works corr
 3. If you see something like "v18.17.0" or higher, you already have it! 
 4. If not, continue with the installation
 
+**⚠️ Important Note About Node.js Versions:**
+If you're running the tests and encounter compatibility issues, consider that you might have a different version of Node.js installed than what this project was developed with. This project was tested with Node.js v18.x and v20.x (LTS versions).
+
+**If you have version conflicts:**
+- Use **nvm** (Node Version Manager) to manage multiple Node.js versions
+- Install nvm: https://github.com/nvm-sh/nvm (Mac/Linux) or https://github.com/coreybutler/nvm-windows (Windows)
+- Then you can switch versions: `nvm use 18` or `nvm use 20`
+
 **How to install Node.js?**
 1. Go to: https://nodejs.org
 2. Download the **LTS** version (recommended)
@@ -446,6 +454,33 @@ sudo npx playwright test
 **This is normal.** Automatic browsers sometimes trigger alerts.
 - Add the project folder to exceptions
 - Or temporarily disable the antivirus
+
+### "Node.js version incompatibility errors"
+**Symptoms:** Error messages mentioning unsupported syntax, module compatibility issues, or "engine" requirements.
+
+**Why does this happen?** Different Node.js versions support different JavaScript features.
+
+**Solutions:**
+```bash
+# Check your current Node.js version:
+node --version
+
+# Check what version this project expects:
+cat package.json | grep "engines" -A 3
+
+# If you need to change versions, use nvm:
+# Install the recommended version (18 or 20):
+nvm install 18
+nvm use 18
+
+# Verify the change:
+node --version
+
+# Re-install dependencies with the correct Node version:
+npm install
+```
+
+**Alternative solution:** Update Node.js to the latest LTS version from https://nodejs.org
 
 ---
 
