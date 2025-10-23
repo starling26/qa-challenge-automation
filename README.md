@@ -1,6 +1,6 @@
-# QA Challenge Automation - Complete Test Suite
+#QA Challenge Automation - Complete Test Suite
 
-## Project Description
+Project Description
 
 Automated test suite to validate ParaBank website functionalities, with special focus on contact form validation and its validation rules.
 
@@ -17,7 +17,7 @@ Before you begin, make sure you have installed:
 
 - Node.js v18.17.0 or higher (v20.x recommended)
 - Git v2.x.x or higher
-- Visual Studio Code** (recommended)
+- Visual Studio Code (recommended)
 
  Verify Installations
 
@@ -58,11 +58,19 @@ Project Installation
 
 1. Clone the Repository
 
-Option A - Using Git (recommended):**
-bash
-git clone https://github.com/starling26/qa-challenge-automation.git
-cd qa-challenge-automation
-```
+Option A - Using Git (recommended):
+Terminal:
+
+	git clone https://github.com/starling26/qa-challenge-automation.git
+	cd qa-challenge-automation
+
+Open project from terminal in vsc or cursor:
+Terminal:
+
+	git clone https://github.com/starling26/qa-challenge-automation.git
+	cd qa-challenge-automation
+	code .
+
 
 Option B - Download ZIP:
 
@@ -70,28 +78,29 @@ Option B - Download ZIP:
 2. Click the green Code button -> Download ZIP
 3. Extract the ZIP file to your preferred location
 4. Open terminal and navigate to the folder:
-```bash
-cd path/to/qa-challenge-automation
-```
+   
+Terminal:
+
+	cd path/to/qa-challenge-automation
 
 2. Install Dependencies
 
-Terminal
+Terminal:
 
 	npm install
-``
+
 This process may take 2-5 minutes.
 
 3. Install Playwright Browsers
 
-Terminal
-```
-npx playwright install
-```
+Terminal:
+
+	npx playwright install
+
 
 If you encounter problems during installation:**
 
-Terminal
+Terminal:
 	
 	 Force installation
 	npx playwright install --force
@@ -107,7 +116,7 @@ Running the Tests
 
 Basic Commands
 
-	Terminal
+Terminal:
 	
 	 Run all tests
 	npx playwright test
@@ -127,24 +136,19 @@ Basic Commands
 
  View Reports
 
-Terminal
 Generate and open HTML report
+Terminal:
 
 	npx playwright show-report
 
-
-
-
-
 Error: "playwright not found"
-Terminal
+Terminal:
 
 	npm install
 	npx playwright install
 
-
 Permission errors on Mac/Linux
-Terminal
+Terminal:
 
 	sudo npx playwright install
 
@@ -155,7 +159,7 @@ Tests fail immediately
 3. Check configuration in `playwright.config.ts`
 
 Error installing dependencies
-Terminal
+Terminal:
 
 Clear cache and try again
 
