@@ -91,7 +91,9 @@ Method 1: Download ZIP
 
 Step 5: Install Project Dependencies
 
-	   npm install
+  
+	   1-npm init
+	   2-npm install
 	   
 	   (This may take 2–5 minutes)
 
