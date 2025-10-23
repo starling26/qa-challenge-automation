@@ -24,6 +24,7 @@ Make sure you have the following installed:
 	•	Git
 
 Step 1: Verify Node.js
+
 	1-Open the terminal:
 	2-Windows: Press Windows + R, type cmd, press Enter
 	3-macOS: Press Cmd + Space, type Terminal, press Enter
