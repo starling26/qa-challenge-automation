@@ -35,3 +35,6 @@ yarn-error.log*
 # Screenshots and videos
 screenshots/
 videos/
+
+#congif
+tsconfig
