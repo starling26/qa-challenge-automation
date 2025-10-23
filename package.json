@@ -1,68 +1,104 @@
-{
-  "name": "qa-challenge-automation",
-  "version": "1.0.0",
-  "description": "QA Challenge - Playwright Test Automation Framework for ParaBank",
-  "main": "index.js",
-  "scripts": {
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
-    "test:debug": "playwright test --debug",
-    "test:report": "playwright show-report",
-    "test:trace": "playwright test --trace on",
-    "test:chromium": "playwright test --project=chromium",
-    "test:firefox": "playwright test --project=firefox",
-    "test:webkit": "playwright test --project=webkit",
-    "test:mobile": "playwright test --project=mobile-chrome --project=mobile-safari",
-    "test:smoke": "playwright test --grep=\"TC01|TC02|TC03\"",
-    "test:critical": "playwright test --grep=\"TC01|TC02|TC03|TC04|TC05|TC_AUTO_013|TC_AUTO_014\"",
-    "test:functional": "playwright test --grep=\"TC01|TC04|TC09|TC10|TC11|TC12|TC_AUTO_013|TC_AUTO_014|TC_AUTO_017|TC_AUTO_018\"",
-    "test:validation": "playwright test --grep=\"TC02|TC03|TC07|TC13A\"",
-    "test:security": "playwright test --grep=\"TC05|TC08\"",
-    "test:ui": "playwright test --grep=\"TC01|TC06\"",
-    "test:accessibility": "playwright test --grep=\"TC09\"",
-    "install:browsers": "playwright install",
-    "install:deps": "playwright install-deps",
-    "setup": "npm install && playwright install",
-    "clean": "rm -rf test-results playwright-report screenshots/temp",
-    "lint": "echo 'Linting TypeScript files...' && npx tsc --noEmit",
-    "pretest": "npm run lint"
+import { defineConfig, devices } from '@playwright/test';
+
+/**
+ * @see https://playwright.dev/docs/test-configuration
+ */
+export default defineConfig({
+  testDir: './tests',
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? 1 : undefined,
+
+  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  use: {
+    
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    trace: 'on-first-retry',
+    
+    /* Take screenshot on failure */
+    screenshot: 'only-on-failure',
+    
+    /* Record video on failure */
+    video: 'retain-on-failure',
+    
+    /* Global timeout for each action */
+    actionTimeout: 30000,
+    
+    /* Global timeout for navigation */
+    navigationTimeout: 30000,
   },
-  "keywords": [
-    "qa",
-    "testing",
-    "automation",
-    "playwright",
-    "typescript",
-    "parabank",
-    "e2e",
-    "ui-testing",
-    "regression",
-    "ci-cd"
+
+  /* Configure projects for major browsers */
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
+
+    // /* Test against mobile viewports. */
+    // {
+    //   name: 'mobile-chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+    // {
+    //   name: 'mobile-safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
   ],
-  "author": "starling26",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/starling26/qa-challenge-automation.git"
+
+  /* Run your local dev server before starting the tests */
+  // webServer: {
+  //   command: 'npm run start',
+  //   url: 'http://127.0.0.1:3000',
+  //   reuseExistingServer: !process.env.CI,
+  // },
+
+  /* Global setup and teardown */
+  globalSetup: undefined,
+  globalTeardown: undefined,
+  
+  /* Test timeout */
+  timeout: 30000,
+  
+  /* Expect timeout */
+  expect: {
+    timeout: 10000
   },
-  "bugs": {
-    "url": "https://github.com/starling26/qa-challenge-automation/issues"
-  },
-  "homepage": "https://github.com/starling26/qa-challenge-automation#readme",
-  "devDependencies": {
-    "@playwright/test": "^1.40.0",
-    "@types/node": "^20.0.0",
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {},
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
-  },
-  "browserslist": [
-    "last 2 Chrome versions",
-    "last 2 Firefox versions",
-    "last 2 Safari versions",
-    "last 2 Edge versions"
-  ]
-}
+  
+  /* Output directory for test results */
+  outputDir: 'test-results/',
+  
+  /* Whether to preserve output directory */
+  preserveOutput: 'always',
+  
+  /* Test match patterns */
+  testMatch: ['**/*.spec.ts', '**/*.test.ts'],
+  
+  /* Test ignore patterns */
+  testIgnore: ['**/node_modules/**', '**/dist/**'],
+});
