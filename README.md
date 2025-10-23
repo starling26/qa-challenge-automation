@@ -34,26 +34,26 @@ node --version
 
    •	You’re ready if it shows: v18.17.0 or higher, v20.x.x, or v21.x.x+
    
-   3.	If Node.js is not installed:
-   1.	Go to https://nodejs.org
-   2.	Click the green LTS button
-   3.	Run the installer
-   4.	Verify installation:
+	   1.	If Node.js is not installed:
+	   2.	Go to https://nodejs.org
+	   3.	Click the green LTS button
+	   4.	Run the installer
+	   5.	Verify installation:
 
 node --version
 
 Step 2: Verify Git
-	1.	Check if Git is installed:
-
-   git --version
-   
+		1.	Check if Git is installed:
+	
+	   git --version
+	   
    •	You’re ready if it shows git version 2.x.x or higher
    
-   2.	If Git is not installed (Windows):
-   1.	Go to https://git-scm.com/download/win
-   2.	Download the 64-bit installer
-   3.	Run the installer (use default options)
-   4.	Verify installation:
+	   2.	If Git is not installed (Windows):
+	   1.	Go to https://git-scm.com/download/win
+	   2.	Download the 64-bit installer
+	   3.	Run the installer (use default options)
+	   4.	Verify installation:
 
 git --version
 
