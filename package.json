@@ -1,10 +1,11 @@
 {
-  "name": "qa-challenge-automation",
-  "version": "1.0.0",
-  "devDependencies": {
-    "@playwright/test": "^1.56.0"
-  },
-  "scripts": {
-    "test": "playwright test"
-  }
+    "name": "qa-challenge-automation",
+    "version": "1.02",
+    "scripts": {
+        "test": "playwright test",
+        "install:browsers": "playwright install"
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.56.0"
+    }
 }
