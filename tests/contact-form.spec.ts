@@ -30,6 +30,7 @@ test.describe('ParaBank Automated Tests', () => {
 
     await page.locator('#name').fill('Starling');
     await page.locator('#email').fill('sdeg@yahoo.com');
+    await page.locator('#phone').fill('8091234567');
     await page.locator('#message').fill('Test message');
     await page.locator('input[value="Send to Customer Care"]').click();
     
@@ -97,10 +98,78 @@ test.describe('ParaBank Automated Tests', () => {
   test('TC_AUTO_007: Telephone field validation', async ({ page }) => {
     await page.goto(`${url}/contact.htm`);
     
+    await page.locator('#name').fill('Test User');
+    await page.locator('#email').fill('test@gmail.com');
     await page.locator('#phone').fill('abcdefg');
+    await page.locator('#message').fill('This is a valid test message for QA automation challenge');
+    await page.getByRole('button', { name: 'Send to Customer Care' }).click();
+
+    // take a screenshot after clicking submit
+    await page.screenshot({ path: 'screenshots/TC_AUTO_007.png', fullPage: true });
+
     const lettersValue = await page.locator('#phone').inputValue();
 
     expect(lettersValue).toMatch(/^[0-9]*$/);
   });
 
-});
+    test('TC_AUTO_008: Successful Transfer Between Accounts', async ({ page }) => {
+      await test.step('login with valid user', async () => {
+        await page.goto(url);
+        await page.locator('input[name="username"]').fill('jose1');
+        await page.locator('input[name="password"]').fill('123456');
+        await page.getByRole('button', { name: 'Log In' }).click();
+      });
+
+      await test.step('Go to transfers', async () => {
+        await page.getByRole('link', { name: 'Transfer Funds' }).click();
+        await page.locator('#amount').fill('100');
+        await page.locator('#fromAccountId').selectOption('25443');
+        await page.locator('#toAccountId').selectOption('29661');
+        await page.getByRole('button', { name: 'Transfer' }).click();
+        await expect(page.locator('text=Transfer Complete!')).toBeVisible();
+      });
+
+    });
+
+    test('TC_AUTO_009: Transfer with Insufficient Balance', async ({ page }) => {
+      await test.step('login with valid user', async () => {
+      await page.goto(url);
+      await page.locator('input[name="username"]').fill('jose1');
+      await page.locator('input[name="password"]').fill('123456');
+      await page.getByRole('button', { name: 'Log In' }).click();
+      });
+      await test.step('Validate account balances', async () => {
+        await expect(page.getByRole('cell', { name: '$0.00' })).toBeVisible();
+
+      });
+
+      await test.step('Transfers with Insufficient Balance', async () => {
+      await page.getByRole('link', { name: 'Transfer Funds' }).click();
+      await page.locator('#amount').fill('10000');
+      await page.locator('#fromAccountId').selectOption('25443');
+      await page.locator('#toAccountId').selectOption('26661');
+      await page.getByRole('button', { name: 'Transfer' }).click();
+      await expect(page.locator('text=Insufficient funds')).toBeVisible();
+      });
+  
+    });
+
+    test('TC_AUTO_010: Transfers with negative amount', async ({ page }) => {
+    await test.step('login with valid user', async () => {
+      await page.goto(url);
+      await page.locator('input[name="username"]').fill('jose1');
+      await page.locator('input[name="password"]').fill('123456');
+      await page.getByRole('button', { name: 'Log In' }).click();
+    });
+
+    await test.step('Transfers with negative amount', async () => {
+      await page.getByRole('link', { name: 'Transfer Funds' }).click();
+      await page.locator('#amount').fill('-50');
+      await page.locator('#fromAccountId').selectOption('25443');
+      await page.locator('#toAccountId').selectOption('29661');
+      await page.getByRole('button', { name: 'Transfer' }).click();
+      await expect(page.locator('text=Please enter a valid amount')).toBeVisible();
+    });
+
+    });
+  });
